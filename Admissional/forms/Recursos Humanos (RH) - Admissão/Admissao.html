@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- core css e javaScript -->
+    <title>Admissão</title>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/style-guide/css/fluig-style-guide.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/jquery/jquery.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/jquery/jquery-ui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/mustache/mustache-min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/style-guide/js/fluig-style-guide.min.js"
+      charset="utf-8"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="estilo.css" />
+
+    <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+    <!-- core css e javaScript -->
+
+    <!-- custom css e javaScript -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/font-awesome.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/datatables.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/datatables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.priceFormat.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.maskMoney.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.mask.js"
+    ></script>
+
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/custom-style-guide.css"
+    />
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-util.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-zoom.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-datatables.js"
+    ></script>
+
+    <script type="text/javascript" src="scripts/js/formMain.js"></script>
+    <script type="text/javascript" src="scripts/js/formZoom.js"></script>
+    <link type="text/css" rel="stylesheet" href="Styles/css/forms.css" />
+
+    <!-- custom css e javaScript -->
+  </head>
+  <body>
+    <main class="alinhar">
+      <div class="fluig-style-guide">
+        <form name="form" role="form">
+          <!-- cabeçalho do formulário -->
+          <input
+            type="hidden"
+            name="hddCampoDescritor"
+            id="hddCampoDescritor"
+          />
+          <input type="hidden" name="chaveFormulario" id="chaveFormulario" />
+          <input type="hidden" name="hddDiretorArea" id="hddDiretorArea" />
+          <input type="hidden" name="hddNumAnexos" id="hddNumAnexos" />
+          <input type="hidden" name="hddNumProcess" id="hddNumProcess" />
+          <input type="hidden" name="hddMailSol" id="hddMailSol" />
+          <div
+            id="divCabecalho"
+            class="col-12 fs-display-flex fs-justify-content-space-between fs-sm-margin-bottom fs-md-padding fs-align-items-center fs-width-max-content"
+          >
+            <div class="row">
+              <h2 id="titulo-Principal">
+                |&nbsp;&nbsp;&nbsp; Admissão 
+              </h2>
+            </div>
+            <div
+              id="icone-dark-mode"
+              class="fs-display-flex fs-justify-content-end fs-text-center"
+            >
+              <input type="checkbox" name="changetheme" id="change-theme" />
+              <label for="change-theme" id="icone">
+                <label id="modeDark"> Modo Escuro</label>
+                <label id="modeLight"> Modo Claro</label>
+                <i class="bi bi-sun"></i>
+                <i class="bi bi-moon"></i>
+              </label>
+            </div>
+          </div>
+
+          <!-- Info Solicitante -->
+          <fieldset id="divInfoSol" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseInfoSol"
+                href="#divCollapseInfoSol"
+              >
+                <span class="fs-text-md"> Informações Solicitante</span></a
+              >
+            </legend>
+
+            <div id="divCollapseInfoSol" class="panel-collapse collapse in">
+              <div id="fieldColab">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label>Nome Solicitante:</label>
+                    <input type="hidden" name="hddCodSolic" id="hddCodSolic" />
+                    <input
+                      type="hidden"
+                      name="hddNomeSolic"
+                      id="hddNomeSolic"
+                    />
+                    <input
+                      name="txtSolicitante"
+                      id="txtSolicitante"
+                      class="form-control"
+                      type="text"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Matrícula:</label>
+                    <input
+                      type="text"
+                      name="txtMatSolic"
+                      id="txtMatSolic"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Data Solicitação:</label>
+                    <input
+                      type="text"
+                      name="txtDataSolicitacao"
+                      id="txtDataSolicitacao"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Abertura de Vaga -->
+          <fieldset id="divAbeVag" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseAbeVag"
+                href="#divCollapseAbeVag"
+              >
+                <span class="fs-text-md"> Abertura de Vaga</span></a
+              >
+            </legend>
+
+            <div id="divCollapseAbeVag" class="panel-collapse collapse in">
+              <div id="fieldColab1">
+                <div class="row">
+                  <div class="form-group col-md-3" id="divLidIme">
+                    <label class="required" for="txtLidImed"
+                      >Gestor Imediato</label
+                    >
+                    <input
+                      type="text"
+                      name="txtLidImed"
+                      id="txtLidImed"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-3" id="divZoomDirAreResp">
+                    <label class="required" for="txtDirAreImed"
+                      >Diretor de Área Imediato</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="hidden"
+                        name="hddDirAreImedCod"
+                        id="hddDirAreImedCod"
+                      />
+                      <input
+                        type="text"
+                        name="txtDirAreImed"
+                        id="txtDirAreImed"
+                        class="form-control"
+                        readonly
+                      />
+                      <div class="input-group-btn">
+                        <button
+                          type="button"
+                          id="btnZoomDirAreImed"
+                          class="btn btn-primary btn-custom-zoom"
+                          disabled
+                        >
+                          <span
+                            class="fluigicon fluigicon-user-search icon-sm"
+                          ></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3" id="divZoomCargo">
+                    <label class="required" for="txtCargo">Cargo</label>
+                    <div class="input-group">
+                      <input
+                        type="hidden"
+                        name="hddCargoCod"
+                        id="hddcargoCod"
+                      />
+                      <input
+                        type="text"
+                        name="txtCargo"
+                        id="txtCargo"
+                        class="form-control"
+                        readonly
+                      />
+                      <div class="input-group-btn">
+                        <button
+                          type="button"
+                          id="btnZoomCargo"
+                          class="btn btn-primary btn-custom-zoom"
+                          disabled
+                        >
+                          <span
+                            class="fluigicon fluigicon-user-search icon-sm"
+                          ></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3" id="divSubst">
+                    <label class="required" for="slcSubst">É substituição?</label>
+                    <select name="slcSubst" class="form-control" id="slcSubst">
+                      <option value="">Selecione</option>
+                      <option value="Sim">
+                        Sim
+                      </option>
+                      <option value="Não">
+                        Não
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2" style="display: none;" id="divZoomFunc">
+                    <label class="required" for="txtFunc">Funcionário</label>
+                    <div class="input-group">
+                      <input type="hidden" name="hddFuncCod" id="hddFuncCod" />
+                      <input
+                        type="text"
+                        name="txtFunc"
+                        id="txtFunc"
+                        class="form-control"
+                        readonly
+                      />
+                      <div class="input-group-btn">
+                        <button
+                          type="button"
+                          id="btnZoomFunc"
+                          class="btn btn-primary btn-custom-zoom"
+                          disabled
+                        >
+                          <span
+                            class="fluigicon fluigicon-user-search icon-sm"
+                          ></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3" id="divZoomCentCus">
+                    <label class="required">Centro de Custos </label>
+                    <div class="input-group">
+                      <input
+                        type="hidden"
+                        name="hddCentCusCod"
+                        id="hddCentCusCod"
+                      />
+                      <input
+                        type="text"
+                        name="txtCentCus"
+                        id="txtCentCus"
+                        class="form-control"
+                        readonly
+                      />
+                      <div class="input-group-btn">
+                        <button
+                          type="button"
+                          id="btnZoomCentCus"
+                          class="btn btn-primary btn-custom-zoom"
+                          disabled
+                        >
+                          <span
+                            class="fluigicon fluigicon-user-search icon-sm"
+                          ></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3" id="divZoomsetor">
+                    <label class="required" for="txtSetor">Setor</label>
+                    <input
+                      type="text"
+                      name="txtSetor"
+                      id="txtSetor"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label class="required" for="slcEst">Estabelecimento</label>
+                    <select name="slcEst" class="form-control" id="slcEst">
+                      <option value="">Selecione</option>
+                      <option value="Quedas">Quedas</option>
+                      <option value="Guarapuava">Guarapuava</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-1">
+                    <label class="required" for="txtTurno">Turno</label>
+                    <input
+                      type="text"
+                      name="txtTurno"
+                      id="txtTurno"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label class="required" for="txtHorario">Horário</label>
+                    <input
+                      type="text"
+                      name="txtHorario"
+                      id="txtHorario"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcRegCont"
+                      >Regime de Contratação</label
+                    >
+                    <select
+                      name="slcRegCont"
+                      class="form-control"
+                      id="slcRegCont"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="CLT">CLT</option>
+                      <option value="PJ">PJ</option>
+                      <option value="Temporário">Temporário</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcIng">Inglês</label>
+                    <select name="slcIng" class="form-control" id="slcIng">
+                      <option value="">Selecione</option>
+
+                      <option value="Não Necessário">Não Necessário</option>
+                      <option value="Básico">Básico</option>
+                      <option value="Intermediário">Intermediário</option>
+                      <option value="Avançado">Avançado</option>
+                      <option value="Fluente">Fluente</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcEsp">Espanhol</label>
+                    <select name="slcEsp" class="form-control" id="slcEsp">
+                      <option value="">Selecione</option>
+
+                      <option value="Não Necessário">Não Necessário</option>
+                      <option value="Básico">Básico</option>
+                      <option value="Intermediário">Intermediário</option>
+                      <option value="Avançado">Avançado</option>
+                      <option value="Fluente">Fluente</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12" id="divAbeVagObs">
+                    <label>Obs:</label>
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtObsMotVag"
+                      id="txtObsMotVag"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Atividades e Desafios do Futuro Colaborador e Perfil Necessário -->
+          <fieldset id="divAtvDesPerfNec" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAK9JREFUSEtjZKAxYKSx+Qx4LZh0QP4/yAF5Dg/JdsjgtoAYH2L1waQD8vsZGBgc0OLnQJ7DQ0dkMUosAIc9OkCPC4otgBmIbtDkA3IH/zMw2hHyIUgeVxChpB50C2B8Qj6k2AJcPkS2mCIfjFoALyJwRfLQDyJaJlNsRcmePIeHruiW4k2mhFxISVFBlAvJtgDmckIGEJLHWVQQawEx1e3A1mjEuJCQGrIrc0IGw+QB85HVGQz6QpcAAAAASUVORK5CYII="
+              />
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseAtvDesPerfNec"
+                href="#divCollapseAtvDesPerfNec"
+              >
+                <span class="fs-text-md"> Alinhamento de Perfil</span>
+              </a>
+            </legend>
+            <div id="divCollapseAtvDesPerfNec" class="panel-collapse collapse in">
+              <fieldset>
+                <legend>Atividades e Desafios</legend>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >Descreva as Atividades / Responsabilidades</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtAtvResp"
+                      id="txtAtvResp"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >Para o exercício destas atividades é necessária uma
+                      formação acadêmica ou alguma formação técnica específica?
+                      Qual ou quais?</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtNecFormAca"
+                      id="txtNecFormAca"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="row"></div>
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >Conte-nos 03 pontos fortes da sua área que podem ser um
+                      atrativo para o futuro colaborador.</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtPontFort"
+                      id="txtPontFort"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >Conte-nos 03 pontos críticos da área com as quais o
+                      profissional terá que lidar.</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtPontCrit"
+                      id="txtPontCrit"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Perfil Desejado</legend>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >O que não pode, o que é inadimissível - em termos técnicos
+                      ou comportamentais (min.1)</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtInadComp"
+                      id="txtInadComp"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="required"
+                      >Disponha de 3 a 5 perguntas técnicas para inserção da
+                      pré-entrevista.</label
+                    >
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtPegTec"
+                      id="txtPegTec"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </fieldset>
+
+          <!-- TI -->
+          <fieldset id="divInfTec" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAjJJREFUSEvllM1LVGEUh59zxSQVIqxQqLljtBWj2sbcEYuKoqA/ILDIwrzjqkUfKARtIqhrWiC1al1EVBDVXCva9QGuImHmnQxsobgK4jr3xI1RZqYZmSlddZYvv3Oe8/UeYY1N1jg+KwK8pzuapCU4rsoBoBuIAwpkRfUTlvVsXUvbg/4974NqiVYFjPr2QYXxQtCVCp3WUM+kenIvK4kqAkYnY8OqMlJwmFa4DXwMNJiK3hqlsUuEXSgDQGdBd951zLVyyB+Am+n4iIgOAwGil+fD3PWRJIuVsotaqM3BRYELQANoynVyXrG2BHArHTscijwGfoZi7R9KZF7XsgSeHzsC8hAQFfamEubdkt8yYCy9uTUvzV+AdoGBQcdE/a/Ziir/3NS6qWtp8MsAz4+fBR0HmRpMZLtFfm9LzRa1i+YgA3RoKMdSPdlHkfMyYNS3nygcQjjpJsy9miMXCb20fQnhCjDhOuZ0CcDz7a/AVkRPNITW84FkdrYeyFg63p63OIrqHeCD65jd5YAfwPpC0FnXMR31ADzf/g5sKfjMu45pKweU9Nx1TF1nxPPtiv5FQ64sqLWK/wOwAGxYask/zmDBdczG0iFP2n0oE4AFvHAds6/W/ke6ohkEoto3mMzdLwHUE6xce+PN9piVzxtgxnXMtqrHbiVItS3xXnV2ixVeja6AKndTSXNqVQAVkpmxFhd3nuv9NrfagDlE34ZBQ/9Qbyb6zSVW12/9mzmtOeAXVAvnGdXtraQAAAAASUVORK5CYII="
+              />
+              <a
+                class="collapse-icon dow fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseInfTec"
+                href="#divCollapseInfTec"
+                ><span class="fs-text-md"> Informações para TI</span></a
+              >
+            </legend>
+            <div id="divCollapseInfTec" class="panel-collapse collapse in">
+              <div class="row" style="margin-left: 0px;">
+                <div class="form-group col-md-4"> 
+                  <div class="row form-group" style="margin-bottom: 0px;">
+                    <label>Será necessário equipamentos/acessos de TI?</label>
+                  </div>
+                  <input type="hidden" name="radioEquipTI" id="radioEquipTI">
+                  <div class="row form-group" style="margin-bottom: 0px;">
+                    <div style="display: inline-block; margin-right: 10px;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="slcEquipTI" value="true" id="slcEquipTI_s">
+                        <label for="slcEquipTI_s">Sim</label>
+                      </div>
+                    </div>
+                    <div style="display: inline-block;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="slcEquipTI" value="false" id="slcEquipTI_n">
+                        <label for="slcEquipTI_n">Não</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <fieldset id="fieldRecursos" style="height: 150px">
+                    <legend class="fs-sm-margin">Recursos</legend>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="totvs" name="totvs" value="totvs" />
+                      <label for="totvs">Totvs</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="sharepoint" name="sharepoint" value="sharepoint" />
+                      <label for="sharepoint">SharePoint</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input
+                        type="checkbox"
+                        id="BI"
+                        name="BI"
+                        value="BI"
+                      />
+                      <label for="BI">Power BI</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input
+                        type="checkbox"
+                        id="fluig"
+                        name="fluig"
+                        value="fluig"
+                      />
+                      <label for="fluig">Fluig</label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="form-group col-md-4">
+                  <fieldset id="fieldEquip" style="height: 150px">
+                    <legend class="fs-sm-margin">Equipamentos</legend>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="chip" name="chip" />
+                      <label for="chip">Chip</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="celular" name="celular" />
+                      <label for="celular">Celular</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="notebook" name="notebook" />
+                      <label for="notebook">Notebook</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="desktop" name="desktop" />
+                      <label for="desktop">Computador Desktop</label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="form-group col-md-4">
+                  <fieldset id="fieldAcess" style="height: 150px">
+                    <legend class="fs-sm-margin">Acessos</legend>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="rede" name="rede" />
+                      <label for="rede">Rede</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="email" name="email" />
+                      <label for="email">E-mail</label>
+                    </div>
+                    <div class="custom-checkbox custom-checkbox-primary">
+                      <input type="checkbox" id="wifi" name="wifi" />
+                      <label for="wifi">Wi-Fi Colaborador</label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="form-group col-md-12" id="divInfoBI">
+                  <label for="txtInfBI">Informações Power BI</label>
+                  <textarea
+                    style="resize: none"
+                    rows="4"
+                    name="txtInfBI"
+                    id="txtInfBI"
+                    class="form-control"
+                    readonly
+                  ></textarea>
+                </div>
+                <div class="form-group col-md-12" id="divInfoFluig">
+                  <label for="txtInfFluig">Informações Fluig</label>
+                  <textarea
+                    style="resize: none"
+                    rows="4"
+                    name="txtInfFluig"
+                    id="txtInfFluig"
+                    class="form-control"
+                    readonly
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <fieldset id="divInfTecFunc" class="fs-sm-padding">
+              <legend>
+                <a
+                  class="collapse-icon dow fs-no-text-underline"
+                  data-toggle="collapse"
+                  data-parent="#divCollapseInfTecFunc"
+                  href="#divCollapseInfTecFunc"
+                  ><span class="fs-text-md"> Liberação de Recurso </span></a
+                >
+              </legend>
+
+              <div id="divCollapseInfTecFunc" class="panel-collapse collapse in">
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <p id="titulo-Aviso">
+                      <strong style="background-color: #9dff00b9; padding: 2px; border-radius: 4px;">|&nbsp;&nbsp;&nbsp;Orientação: Libere o recurso sob sua responsabilidade e envie a atividade.</strong>
+                    </p>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <p id="titulo-Aviso1">
+                      <strong style="background-color: #9dff00b9; padding: 2px; border-radius: 4px;">|&nbsp;&nbsp;&nbsp;A solicitação só será finalizada após a conclusão de todas as liberações paralelas.</strong>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6" id="nomeRecrutado">
+                    <label class="required" for="txtNomeRecrutado"
+                      >Nome: </label>
+                    <input type="text" name="txtNomeRecrutado" id="txtNomeRecrutado" class="form-control" readonly />
+                  </div>
+                  <div class="form-group col-md-3" id="MatriculaRecrutado">
+                    <label class="required" for="txtMatriculaRecrutado"
+                      >N° Matrícula: </label>
+                    <input type="text" name="txtMatriculaRecrutado" id="txtMatriculaRecrutado" class="form-control" readonly />
+                  </div>
+                  <div class="form-group col-md-3" id="UnidadeRecrutado">
+                    <label class="required" for="txtUnidadeRecrutado"
+                      >Unidade: </label>
+                    <input type="text" name="txtUnidadeRecrutado" id="txtUnidadeRecrutado" class="form-control" readonly />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4" id="CargoRecrutado">
+                    <label class="required" for="txtCargoRecrutado"
+                      >Cargo: </label>
+                    <input type="text" name="txtCargoRecrutado" id="txtCargoRecrutado" class="form-control" readonly />
+                  </div>
+                  <div class="form-group col-md-4" id="SetorRecrutado">
+                    <label class="required" for="txtSetorRecrutado"
+                      >Setor: </label>
+                    <input type="text" name="txtSetorRecrutado" id="txtSetorRecrutado" class="form-control" readonly />
+                  </div>
+                  <div class="form-group col-md-4" id="AdmissaoRecrutado">
+                    <label class="required" for="txtAdmissaoRecrutado"
+                      >Data Admissão: </label>
+                    <input type="text" name="txtAdmissaoRecrutado" id="txtAdmissaoRecrutado" class="form-control" readonly />
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <!-- Remuneração -->
+          <fieldset id="divRemu" class="fs-sm-padding">
+            <legend class="fs-text-lg">
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7lJREFUSEu1lV9sFFUUxr9vdqUg6QMqBAzdGSzRhBqJkiKNdXdGX5T4YGLUBGOUxPgPZrYRVIiIS1RsQoR2to2aaDRGI6kkPCH6IDPbpmDqvxC1mPjQma3YGqUPKka3u3N0tszS3Xa7xoT7NHPvuef33XPOPZe4xIOX2D8WBAwMIDZxlXaXQmkHcaMAG8qCiC8AfA2RkalU/liGCOoJrQs4NJS4JlZSDgPS3uCUJ5WSsmX77WP+fHbzArKO9rhQDgJYAuAUhe+K4EyBhe9CJ4tkURsUrCPlIRHcDOA8ibSZ8t+qhcwBZF31SQH6AfwN4PmplP9qvRBkBMoVg4mnIdwHoInCJ0zDe302pApgf9rSipjyTSiSEmwyjfEw1pVhu6qEP5buV+3rcVvaFSinQlEkrjdT/li0qWI4o0YdgWCDEHvSKf/l0CjjIL4M6sMktgNYP5Nk+YSB0mUa3veRI9tN7AW4D8SwmfRvJVEWUwH0OIlOhRwC8eVU0t8YhcV2tG5Qnp0ngefMlL88clQWmFO/KosQdliG91kVoNdRd5I4AOFWy/DeuahMnQCwkiIPmkb+vbB0J1eoQwA6GEineVt+OLLtzSUepfANgk+ZuneoFnCExD2z6aGB7arnAVweINjYpY9/vlDJ9uTWJBUJcgA+tHT/viqA7arjAFbH5M/mbcYvf1RUuer7BLbUOP6V4P5z4mUzBorR2mvDrSump4s/A/jR0v2WWkA5FDHhqm2GN1kJ0Udrm7i0sEuEaQDLqkG0Ld0L58uj39FWliihn0lL91fVAo4DuEOEd6YN7+OFQpF1tLuFchTAhKX7V1/MgbqZgmMAjlu6v7k6B7nEKxTuonC3aXjdtUkWYAelOGDqZ8/2DSb2ijBTC7AddQ+IF/+9R/st3X+uCpDNafeLyGEA3tTypddl2kYLoUE2l3jhgrO5hxKYluH3hQsHT65eEi/EzgBQIXKvZeSPVAHedrTFv1NOA7hWKN3pVH535egzJfwYgLUX5k5D5KXIyYwQ9YAIdgL8oVlww1bD+6sKUC7JE2vWQwlGAMShKB1Wciz8rox6rcJ2tE2ghPdhGorcZCXzo9GmOc3OdrQuUMJL8p+a3ZWu9oxQwnw0YVbI6gLChV5HfYRE2K6bo3ZdUjgaXDb9bby4OIZicV1Nu/5NBDvShv9mbaLqPjj9udaWEoofQHDLQiULwGU8eMDsHP9pPruGb3LfiUSbKEyJSBJkshxnYJjCQYkFg7Pj/b8ADdQ3XG54goYeGhj8A8VfjCgrvET7AAAAAElFTkSuQmCC"
+              />
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseRemu"
+                href="#divCollapseRemu"
+              >
+                Remuneração</a
+              >
+            </legend>
+            <div id="divCollapseRemu" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-md-3" id="divMotVag">
+                  <label class="required" for="slcMotVag">Motivo da Vaga</label>
+                  <select name="slcMotVag" class="form-control" id="slcMotVag">
+                    <option value="">Selecione</option>
+                    <option value="Aumento De Quadro - Não Orçado">
+                      Aumento De Quadro - Não Orçado
+                    </option>
+                    <option value="Aumento De Quadro">
+                      Aumento De Quadro - Orçado
+                    </option>
+                    <option value="Aumento De Quadro Provisório">
+                      Aumento De Quadro Provisório
+                    </option>
+                    <option value="Substituição">Substituição</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3" id="divfunci" style="display: none;">
+                  <label class="required" for="txtFunc1">Funcionário</label>
+                  <input
+                    type="text"
+                    name="txtFunc1"
+                    id="txtFunc1"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-3" id="divSalario1">
+                  <label class="required" for="txtSalario1">Salário</label>
+                  <input
+                    type="text"
+                    name="txtSalario1"
+                    id="txtSalario1"
+                    class="form-control"
+                    placeholder="0.000.000,00"
+                    mask="#000.000.000,00"
+                    readonly
+                  />
+                </div>
+
+                <div class="form-group col-md-3" id="divRespoRemu">
+                  <label for="txtResponsavelRemu">Responsável</label>
+                  <input
+                    type="text"
+                    name="txtResponsavelRemu"
+                    id="txtResponsavelRemu"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-3" id="divDtRespoRemu">
+                  <label for="txtDataAproRemu">Data Preenchimento</label>
+                  <input
+                    type="text"
+                    name="txtDataAproRemu"
+                    id="txtDataAproRemu"
+                    class="form-control"
+                    readonly
+                  />
+                </div>                
+              </div>
+              <fieldset id="divRemu2">
+                <legend>Negociação</legend>
+                <div class="row" style="padding-top: 10px;">
+                  <div class="form-group col-md-6" style="margin-bottom: 0%; margin-left: 0px;"> 
+                      <div class="row form-group" style="margin-bottom: 0%; margin-left: 0px;">
+                        <label class="required" style="background-color: #9dff00b9; padding: 2px; border-radius: 4px;">Decisão</label>
+                      </div>
+                    <input type="hidden" name="radioProposta" id="radioProposta"> 
+                      <div class="row form-group" style="margin-left: 0px;">
+                        <div style="display: inline-block; margin-right: 10px;">
+                          <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="proposta" value="true" id="proposta_s">
+                            <label for="proposta_s">Aceitar Negociação</label>
+                          </div>
+                        </div>
+                        <div style="display: inline-block;">
+                          <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="proposta" value="false" id="proposta_n">
+                            <label for="proposta_n">Recusar Negociação</label>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                      <label for="txtResponsavelRemu2">Responsável</label>
+                      <input
+                        type="text"
+                        name="txtResponsavelRemu2"
+                        id="txtResponsavelRemu2"
+                        class="form-control"
+                        readonly
+                      />
+                  </div>
+                  <div class="form-group col-md-3">
+                      <label for="txtDataAproRemu2">Data Preenchimento</label>
+                      <input
+                        type="text"
+                        name="txtDataAproRemu2"
+                        id="txtDataAproRemu2"
+                        class="form-control"
+                        readonly
+                      />
+                  </div>
+                </div>
+                <div class="row" style="padding: 0px;">
+                  <div class="form-group col-md-3" id="divSalario">
+                    <label for="txtSalario">Contraproposta</label>
+                    <input type="text" name="txtSalario" id="txtSalario" class="form-control" placeholder="0.000.000,00" mask="#000.000.000,00" readonly="">
+                  </div>
+                  <div class="form-group col-md-9" id="divBenExtrRemu">
+                        <label
+                          >Benefícios Extras
+                        </label>
+                        <textarea
+                          style="resize: none"
+                          rows="2"
+                          name="txtBenExtRemu"
+                          id="txtBenExtRemu"
+                          class="form-control"
+                          readonly
+                        ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="row">
+                <div class="form-group col-md-12" id="divObsRemu">
+                  <label>Observações:</label>
+                  <textarea
+                    style="resize: none"
+                    rows="4"
+                    name="txtObsRecHum"
+                    id="txtObsRecHum"
+                    class="form-control"
+                    readonly
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Aprovações -->
+          <fieldset id="divAprov" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"
+              />
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseAprov"
+                href="#divCollapseAprov"
+                ><span class="fs-text-md"> Aprovações</span></a
+              >
+            </legend>
+            <div id="divCollapseAprov" class="panel-collapse collapse in">
+              <fieldset id="fieldDirAre">
+                <legend>Diretor da área</legend>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcAproDirAre"
+                      >Aprovação</label
+                    >
+                    <select
+                      name="slcAproDirAre"
+                      id="slcAproDirAre"
+                      class="form-control"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Não">Não</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtResponsavelDirAre">Responsável</label>
+                    <input
+                      type="text"
+                      name="txtResponsavelDirAre"
+                      id="txtResponsavelDirAre"
+                      class="form-control"
+                      readonly
+                    />
+                    <input type="hidden" name="codResponsavelDirAre" id="codResponsavelDirAre" />
+                    <input type="hidden" name="codUsuarioAG6" id="codUsuarioAG6" />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtDataAproDirAre">Data Aprovação</label>
+                    <input
+                      type="text"
+                      name="txtDataAproDirAre"
+                      id="txtDataAproDirAre"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-12" id="divJusDirAre">
+                    <label for="txtJusDirAre">Justificativa</label>
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtJusDirAre"
+                      id="txtJusDirAre"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset id="fieldGesRH">
+                <legend>Gestor RH</legend>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcAproGesRH">Aprovação</label>
+                    <select
+                      name="slcAproGesRH"
+                      id="slcAproGesRH"
+                      class="form-control"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Não">Não</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtResponsavelGesRH">Responsável</label>
+                    <input
+                      type="text"
+                      name="txtResponsavelGesRH"
+                      id="txtResponsavelGesRH"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtDataAproGesRH">Data Aprovação</label>
+                    <input
+                      type="text"
+                      name="txtDataAproGesRH"
+                      id="txtDataAproGesRH"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-12" id="divJusGesRH">
+                    <label for="txtJusGesRH">Justificativa</label>
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtJusGesRH"
+                      id="txtJusGesRH"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+              
+              <fieldset id="fieldCEO">
+                <legend>CEO</legend>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label class="required" for="slcAproCEO"
+                      >Aprovação</label
+                    >
+                    <select
+                      name="slcAproCEO"
+                      id="slcAproCEO"
+                      class="form-control"
+                    >
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Não">Não</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtResponsavelCEO">Responsável</label>
+                    <input
+                      type="text"
+                      name="txtResponsavelCEO"
+                      id="txtResponsavelCEO"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="txtDataAproCEO">Data Aprovação</label>
+                    <input
+                      type="text"
+                      name="txtDataAproCEO"
+                      id="txtDataAproCEO"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-12" id="divJusCEO">
+                    <label for="txtJusCEO">Justificativa</label>
+                    <textarea
+                      style="resize: none"
+                      rows="4"
+                      name="txtJusCEO"
+                      id="txtJusCEO"
+                      class="form-control"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </fieldset>
+
+          <!-- Recrutamento -->
+          <fieldset id="divRecru" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANdJREFUSEtjZKAxYKSx+Qw4LZi4T8Gfkel/BwMDgwYpjmBkYLj+j5GhJN/+4TaQPpwWTD4g/+Q/A4M0KYbD1DIyMNzLdXiojNeCSQfk/4MU5Dk8JCkY0fXh1DygFuCznCo+IMsCdE2kGIKcEHD6gJAFMHlcqQqWGAavBfiCgSpBNLwswFd8kB3JxJZJpFjwkIGBQY5Yg9HUPchzeKiIUtih2wwtrjsZGBjUSbTk0n9GhkqM4prcwo2Q5fDSlB4WkBXmhOoLuA/IDXOiLSAUluTKk1QdkmMJAMfe1Bn2epCYAAAAAElFTkSuQmCC"
+              />
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseRecru"
+                href="#divCollapseRecru"
+                ><span class="fs-text-md"> Recrutamento</span></a
+              >
+            </legend>              
+            <div id="divCollapseRecru" class="panel-collapse collapse in">
+              <div id="fieldCandidato">
+                <div class="row">
+                  <div class="col-md-6" id="nomeCandidato">
+                    <label class="required" for="txtCandidato">Nome Candidato:</label>
+                    <input type="hidden" name="hddCodCandi" id="hddCodCandi" />
+                    <input
+                      type="hidden"
+                      name="hddNomeCandi"
+                      id="hddNomeCandi"
+                    />
+                    <input
+                      name="txtCandidato"
+                      id="txtCandidato"
+                      class="form-control"
+                      type="text"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-2" id="matriculaCandidato" style="display: none;">
+                    <label class="required" for="txtMatCandi">Matrícula</label>
+                    <input
+                      type="text"
+                      name="txtMatCandi"
+                      id="txtMatCandi"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-3" id="divRecrut">
+                    <label class="required" for="slcRec"
+                      >Local de Recrutamento</label
+                    >
+                    <select name="slcRec" class="form-control" id="slcRec">
+                      <option value="">Selecione</option>
+                      <option value="Interno">Interno</option>
+                      <option value="Externo">Externo</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3" id="divAceite">
+                    <label class="required" for="slcAceite"
+                      >Proposta</label
+                    >
+                    <select name="slcAceite" class="form-control" id="slcAceite">
+                      <option value="">Selecione</option>
+                      <option value="Aceita">Proposta Original Aceita</option>
+                      <option value="SolicitarNegociacao">Solicitar Negociação</option>
+                      <option value="NegociacaoAceita" hidden>Negociação Aceita</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2" id="divSalFinal" style="display: none;">
+                    <label class="required" for="txtSalFinal"
+                      >Salário</label
+                    >
+                    <input
+                      type="text"
+                      name="txtSalFinal"
+                      id="txtSalFinal"
+                      class="form-control"
+                      placeholder="0.000.000,00"
+                      mask="#000.000.000,00"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-2" id="divDTAdmissao">
+                    <label for="txtDataAdmissao" class="required" style="background-color: #9dff00b9; padding: 2px; border-radius: 4px;">
+                      Data de admissão:
+                    </label>
+                    <div class="input-group enable-calendar" style="border: 2px solid #9dff00; border-radius: 4px;">
+                      <input type="text" 
+                             class="form-control field-calendar" 
+                             name="txtDataAdmissao" 
+                             id="txtDataAdmissao" 
+                             readonly
+                             style="border: none; background-color: #fafff3;">
+                      <span class="input-group-addon fs-cursor-pointer" id="btn_txtDataAdmissao" style="background-color: #9dff00b9;">
+                        <span class="fluigicon fluigicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>                                    
+                </div>
+                <fieldset id="divNegociacao">
+                  <legend> Solicitação de Negociação</legend>
+                  <div id="divCollapseNeg" class="panel-collapse collapse">
+                    <div class="form-group col-md-3" id="divSalarioRecru">
+                      <label for="txtSalarioRecru">Contraproposta</label>
+                      <input type="text" name="txtSalarioRecru" id="txtSalarioRecru" class="form-control" placeholder="0.000.000,00" mask="#000.000.000,00" readonly title="Preencha conforme solicitação do candidato.">
+                    </div>
+                    <div class="form-group col-md-9" id="divBenExtr">
+                        <label
+                          >Benefícios Extras (exemplo: auxilio mobilidade, hotel,
+                          passagem...)
+                        </label>
+                        <textarea
+                          style="resize: none"
+                          rows="2"
+                          name="txtBenExt"
+                          id="txtBenExt"
+                          class="form-control"
+                          readonly
+                          title="Preencha conforme solicitação do candidato."
+                        ></textarea>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset id="divDadosCandi">
+                  <legend>
+                    <img
+                      class="iconesImg"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANdJREFUSEtjZKAxYKSx+Qw4LZi4T8Gfkel/BwMDgwYpjmBkYLj+j5GhJN/+4TaQPpwWTD4g/+Q/A4M0KYbD1DIyMNzLdXiojNeCSQfk/4MU5Dk8JCkY0fXh1DygFuCznCo+IMsCdE2kGIKcEHD6gJAFMHlcqQqWGAavBfiCgSpBNLwswFd8kB3JxJZJpFjwkIGBQY5Yg9HUPchzeKiIUtih2wwtrjsZGBjUSbTk0n9GhkqM4prcwo2Q5fDSlB4WkBXmhOoLuA/IDXOiLSAUluTKk1QdkmMJAMfe1Bn2epCYAAAAAElFTkSuQmCC"
+                    />
+                    <a
+                      class="collapse-icon down fs-no-text-underline"
+                      data-toggle="collapse"
+                      data-parent="#divCollapseDados"
+                      href="#divCollapseDados"
+                      ><span class="fs-text-md"> Dados Candidato</span></a
+                    >
+                  </legend>
+                  <div id="divCollapseDados" class="panel-collapse collapse">
+                    <div class="row" id="DivExterno" style="display: none;">
+                      <div class="form-group col-md-9">
+                        <label class="required" for="txtEmailCandi">Email</label>
+                        <input
+                          type="text"
+                          name="txtEmailCandi"
+                          id="txtEmailCandi"
+                          class="form-control"
+                          readonly
+                        />
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label class="required" for="txtCelCandi">Celular</label>
+                        <input
+                          type="text"
+                          name="txtCelCandi"
+                          id="txtCelCandi"
+                          class="form-control"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="row" id="divInfoUniforme" style="display: none;">
+                      <div class="form-group col-md-3">
+                        <label for="calcado">Calçado:</label>
+                        <input type="text" id="calcado" name="calcado" class="form-control" readonly/>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="calca">Calça:</label>
+                        <input type="text" id="calca" name="calca" class="form-control" readonly/>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="camisaTamanho">Camisa/Camiseta:</label>
+                        <select id="camisaTamanho" name="camisaTamanho" class="form-control">
+                          <option value="">Selecione</option>
+                          <option value="P">P</option>
+                          <option value="M">M</option>
+                          <option value="G">G</option>
+                          <option value="GG">GG</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3" id="divSexo">
+                        <label class="required" for="slcSexo"
+                          >Sexo</label
+                        >
+                        <select name="slcSexo" class="form-control" id="slcSexo">
+                          <option value="">Selecione</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Feminino">Feminino</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row" id="divChecklistAdmissao" style="display: none;">
+                      <div class="form-group col-md-4">
+                        <fieldset id="fieldAdmissao">
+                          <legend class="fs-sm-margin">Checklist Admissão</legend>
+                          <div class="row">
+                            <div class="form-group col-md-11" style="margin-bottom: 0%;">
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="rgCpf" name="rgCpf" />
+                                <label for="rgCpf">RG e CPF</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="tituloEleitor" name="tituloEleitor" />
+                                <label for="tituloEleitor">Título de Eleitor</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="certReservista" name="certReservista" />
+                                <label for="certReservista">Certificado de Reservista (obrigatório para candidatos do sexo masculino)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="agenciaContaItau" name="agenciaContaItau" />
+                                <label for="agenciaContaItau">Número da Agência e Conta no Banco Itaú</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="comprovEscolaridade" name="comprovEscolaridade" />
+                                <label for="comprovEscolaridade">Comprovante de Escolaridade</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="comprovResidencia" name="comprovResidencia" />
+                                <label for="comprovResidencia">Comprovante de Residência</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="cnhEmpilhadeira" name="cnhEmpilhadeira" />
+                                <label for="cnhEmpilhadeira">CNH (obrigatória para função de Operador de Empilhadeira)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="certCursosGerais" name="certCursosGerais" />
+                                <label for="certCursosGerais">Certificados de Cursos Gerais</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="carteiraProfissional" name="carteiraProfissional" />
+                                <label for="carteiraProfissional">Carteira Profissional (com número do cartão do PIS e dados pessoais)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="foto3x4" name="foto3x4" />
+                                <label for="foto3x4">Foto 3x4 digitalizada (permitido celular, desde que com fundo claro)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="vacTetanoHepatiteFebre" name="vacTetanoHepatiteFebre" />
+                                <label for="vacTetanoHepatiteFebre">Carteira de Vacinação - Tétano, Hepatite e Febre Amarela (validade de 10 anos)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="vacCovid" name="vacCovid" />
+                                <label for="vacCovid">Carteira de Vacinação - COVID (1ª e 2ª doses)</label>
+                              </div>
+                            </div>                        
+                          </div>
+                        </fieldset>
+                      </div> 
+                      <div class="form-group col-md-4">
+                        <fieldset id="fieldFilhos">
+                          <legend class="fs-sm-margin">Dependentes</legend>
+                          <div class="row">
+                            <div class="form-group col-md-11"> 
+                              <div class="row form-group col-md-11" style="margin-bottom: 0%; margin-left: 0px; padding:0px;">
+                                <label>Possui Dependentes?</label>
+                              </div>
+                              <input type="hidden" name="radioDependentes" id="radioDependentes">
+                              <div class="row form-group col-md-11" style="margin-bottom: 0%; margin-left: 0px;">
+                                <div style="display: inline-block; margin-right: 10px;">
+                                  <div class="custom-radio custom-radio-success">
+                                    <input type="radio" name="dependentes" value="true" id="dependentes_s">
+                                    <label for="dependentes_s">Sim</label>
+                                  </div>
+                                </div>
+                                <div style="display: inline-block;">
+                                  <div class="custom-radio custom-radio-success">
+                                    <input type="radio" name="dependentes" value="false" id="dependentes_n">
+                                    <label for="dependentes_n">Não</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                    
+                            <div class="form-group col-md-11" id="divFilhos" style="margin-bottom: 0%;">
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="registroFilhos" name="registroFilhos" />
+                                <label for="registroFilhos">Registro de nascimento dos filhos menores de 14 anos</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="cpfFilhos" name="cpfFilhos" />
+                                <label for="cpfFilhos">CPF dos filhos menores de 21 anos</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="cadernetaVacFilhos" name="cadernetaVacFilhos" />
+                                <label for="cadernetaVacFilhos">Caderneta de vacinação atualizada (para filhos menores de 7 anos)</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="certFreqEscolar" name="certFreqEscolar" />
+                                <label for="certFreqEscolar">Certificado de frequência escolar (para dependentes em idade escolar)</label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <fieldset id="fieldCasado">
+                          <legend class="fs-sm-margin">Estado Civil</legend>
+                          <div class="row">
+                            <div class="form-group col-md-11"> 
+                              <div class="row form-group col-md-11" style="margin-bottom: 0%; margin-left: 0px; padding:0px;">
+                                <label>É casado?</label>
+                              </div>
+                              <input type="hidden" name="radioCasado" id="radioCasado">
+                              <div class="row form-group col-md-11" style="margin-bottom: 0%; margin-left: 0px;">
+                                <div style="display: inline-block; margin-right: 10px;">
+                                  <div class="custom-radio custom-radio-success">
+                                    <input type="radio" name="casado" value="true" id="casado_s">
+                                    <label for="casado_s">Sim</label>
+                                  </div>
+                                </div>
+                                <div style="display: inline-block;">
+                                  <div class="custom-radio custom-radio-success">
+                                    <input type="radio" name="casado" value="false" id="casado_n">
+                                    <label for="casado_n">Não</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                    
+                            <div class="form-group col-md-11" id="divCasado" style="margin-bottom: 0%;">
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="registroCasamento" name="registroCasamento" />
+                                <label for="registroCasamento">Registro de casamento ou declaração de união estável registrada em cartório</label>
+                              </div>
+                              <div class="custom-checkbox custom-checkbox-primary">
+                                <input type="checkbox" id="rgCpfConjuge" name="rgCpfConjuge" />
+                                <label for="rgCpfConjuge">RG e CPF do cônjuge</label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Medicina do Trabalho -->
+          <fieldset id="divMed" class="fs-sm-padding">
+            <legend class="fs-text-lg">
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseMed"
+                href="#divCollapseMed"
+              >
+                Exame Médico</a
+              >
+            </legend>
+            <div id="divCollapseMed" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label class="required" for="slcCanApt"
+                    >Candidato Apto?</label
+                  >
+                  <select name="slcCanApt" class="form-control" id="slcCanApt">
+                    <option value="">Selecione</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtResponsavelMed">Responsável</label>
+                  <input
+                    type="text"
+                    name="txtResponsavelMed"
+                    id="txtResponsavelMed"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtDataAproMed">Data Aprovação</label>
+                  <input
+                    type="text"
+                    name="txtDataAproMed"
+                    id="txtDataAproMed"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- ADM Pessoal -->
+          <fieldset id="divADMP" class="fs-sm-padding">
+            <legend class="fs-text-lg">
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseADMP"
+                href="#divCollapseADMP"
+              >
+                ADM Pessoal</a
+              >
+            </legend>
+            <div id="divCollapseADMP" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label for="txtMatricula">Matrícula</label>
+                  <input
+                    type="text"
+                    name="txtMatricula"
+                    id="txtMatricula"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtResponsavelADMP">Responsável</label>
+                  <input
+                    type="text"
+                    name="txtResponsavelADMP"
+                    id="txtResponsavelADMP"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtDataAproADMP">Data Aprovação</label>
+                  <input
+                    type="text"
+                    name="txtDataAproADMP"
+                    id="txtDataAproADMP"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Historico -->
+          <fieldset id="fieldHistorico" >
+            <legend>
+              <a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseHistorico" href="#divCollapseHistorico">
+                    <i class="flaticon flaticon-archive icon-sm iconesImg" aria-hidden="true"></i>
+                    Histórico
+                </a>
+            </legend>
+            <div id="divCollapseHistorico" class="panel-collapse collapse in">
+              <input type="hidden" id="hddJsonTblHistorico1" name="hddJsonTblHistorico1">
+              <input type="hidden" id="hddJsonTblHistorico2" name="hddJsonTblHistorico2">
+              <input type="hidden" id="hddJsonTblHistorico3" name="hddJsonTblHistorico3">
+              <input type="hidden" id="hddJsonTblHistorico4" name="hddJsonTblHistorico4">
+              <input type="hidden" id="hddJsonTblHistorico5" name="hddJsonTblHistorico5">
+              <input type="hidden" id="hddJsonTblHistorico6" name="hddJsonTblHistorico6">
+              <input type="hidden" id="hddJsonTblHistorico7" name="hddJsonTblHistorico7">
+              <input type="hidden" id="hddJsonTblHistorico8" name="hddJsonTblHistorico8">
+              <input type="hidden" id="hddJsonTblHistorico9" name="hddJsonTblHistorico9">
+              <input type="hidden" id="hddJsonTblHistorico10" name="hddJsonTblHistorico10">
+              <table id="tblHistorico" class="display nowrap" style="width:150%">
+              </table>
+              
+              <div class="row">		
+                <div style="float: right; margin: 1%">
+                  <input type="text" name="txtPesqtblHistorico" id="txtPesqtblHistorico" class="form-control input-sm" placeholder="Pesquisa" />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Img -->
+          <div class="row" id="rodape">
+            <div
+              class="col-xs-12 fs-md-margin-top fs-xs-align-items-center fs-display-flex fs-justify-content-space-between"
+            >
+              <div class="col-xs-6 fs-no-padding" id="image-footer">
+                <img
+                  src="img/milicones-topo.png"
+                  alt="img-millpar"
+                  class="col-xs-12 fs-no-padding"
+                />
+              </div>
+              <div class="col-xs-3 fs-no-padding" id="logo-footer">
+                <img
+                  src="img/logo_branca.jpg"
+                  alt="logo"
+                  id="logoMillparDark"
+                  class="col-xs-12 fs-no-padding"
+                />
+                <img
+                  src="img/logo_nova.png"
+                  alt="logo2"
+                  id="logoMillparLight"
+                  class="col-xs-12 fs-no-padding"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
