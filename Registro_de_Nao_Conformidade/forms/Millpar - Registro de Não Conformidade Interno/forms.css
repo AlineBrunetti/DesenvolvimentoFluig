@@ -1,0 +1,27 @@
+.panel.panel-default .panel-heading.panel-heading-collapse-icon {
+	background-color: #a3bc38 !important;
+ 	border-color: #a3bc38 !important;
+}
+.fluig-style-guide .panel.panel-default {
+	border-color: #a3bc38 !important;
+}
+.fluig-style-guide .panel.panel-default .panel-heading {
+    border-color: #a3bc38 !important;
+    background-color: #a3bc38 !important;
+}
+.fluig-style-guide .modal-content .modal-header{
+	background-color: #a3bc38 !important;
+}
+.required:after { 
+	content:" *";  
+	color: red; 
+}
+.fluig-style-guide .panel-heading .collapse-icon {
+    text-decoration: none;
+}
+
+.disable{
+	color: #a7a9ac;
+    border-width: 1px;
+    border-color: #d1d3d4;
+}

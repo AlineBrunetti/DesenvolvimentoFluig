@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --cor-dark-fundo: #4a4b48;
+  --cor-titulo: #fff;
+  --cor-secundaria: #b6b6b6;
+  --cor-light-fundo: #fff;
+  --cor-verde-destaque: #92c01f;
+}
+/* Estilos do Cabeçaho */
+h2 #titulo-Principal {
+  color: var(--cor-dark-fundo) !important;
+  font-family: "Montserrat", sans-serif;
+}
+/* Estilos dos ícones dark */
+.bi {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.bi-moon {
+  display: none;
+}
+#modeLight {
+  display: block;
+}
+.dark #modeLight {
+  display: none;
+}
+#modeDark {
+  display: none;
+}
+.dark #modeDark {
+  display: block;
+}
+input[type="checkbox"] {
+  display: none !important;
+}
+/* Estilo dos Icones */
+.iconesImg {
+  vertical-align: sub !important;
+  width: 18px;
+  height: 18px;
+}
+/* Alinhamento da tela */
+.alinhar {
+  padding: 10px;
+}
+/* Estilo dos obrigatórios */
+.required:after {
+  content: " *";
+  color: red;
+}
+/* Estilo Dark */
+.dark legend {
+  color: var(--cor-light-fundo) !important;
+  font-weight: 100 !important;
+}
+.dark #titulo-Principal {
+  color: var(--cor-light-fundo) !important;
+}
+.dark,
+.dark body {
+  background-color: var(--cor-dark-fundo);
+  color: var(--cor-titulo);
+}
+.dark .bi-sun {
+  display: none;
+}
+.dark .bi-moon {
+  display: block;
+  color: var(--cor-light-fundo);
+}
+.dark p {
+  color: var(--cor-titulo) !important;
+}
+.dark input {
+  background-color: var(--cor-secundaria) !important;
+  border: var(--cor-light-fundo);
+}
+.dark label {
+  color: var(--cor-titulo) !important;
+  font-weight: 100 !important;
+}
+.dark textarea {
+  background-color: var(--cor-secundaria) !important;
+}
+.dark select {
+  background-color: var(--cor-secundaria) !important;
+}
+.dark th {
+  color: var(--cor-titulo) !important;
+}
+.dark a {
+  color: var(--cor-titulo) !important;
+}
+.fluig-style-guide .form-control[readonly] {
+  color: black !important;
+}
+
+/* Formatação Imagem */
+#image-footer {
+  max-width: 340px;
+}
+
+#logo-footer {
+  max-width: 160px;
+}
+
+.dark #logoMillparLight {
+  display: none;
+}
+.dark #logoMillparDark {
+  display: block;
+}
+#logoMillparDark {
+  display: none;
+}
+#logoMillparLight {
+  display: block;
+}
+
+/* Estilo :placeholder */
+.fluig-style-guide .form-control[readonly] {
+  color: black !important;
+}
+
+/* btn */
+#botaoAnexo:hover {
+  box-shadow: none;
+  transition: 0.8s;
+}
+#botaoAnexo {
+  margin-right: 13px;
+  height: 32px;
+  font-weight: 100;
+  background: linear-gradient(180deg, #a3bd31 0%, #70a83b 100%);
+  border: none;
+  box-shadow: 0.5px 0.9px 0.9px #00000033;
+  transition: 0.8s;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--cor-light-fundo);
+}
+
+/* Esconde o input */
+input[type='file'] {
+  display: none
+}
+
+/* Aparência que terá o seletor de arquivo */
+.labelANX label {
+  background-color: #FFF;
+  border-radius: 5px;
+  color: #58595B;
+  border-color:#d1d3d4 ;
+  cursor: pointer;
+  margin: 1px;
+  padding: 5px 13px;
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+
+}
+
+

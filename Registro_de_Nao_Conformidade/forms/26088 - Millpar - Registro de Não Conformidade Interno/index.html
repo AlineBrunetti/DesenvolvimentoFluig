@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css" />
+  
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8" ></script>
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+      <link rel="stylesheet" href="estilo.css" />
+
+      <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+      <script type="text/javascript" src="zoom.js"></script>
+    
+      <link type="text/css" rel="stylesheet" href="/CustomForms/resources/css/font-awesome.min.css" />
+      <link type="text/css" rel="stylesheet" href="/CustomForms/resources/css/datatables.min.css" />
+      <script type="text/javascript" src="/CustomForms/resources/js/datatables.min.js" ></script>
+      <script type="text/javascript" src="/CustomForms/resources/js/jquery.priceFormat.js" ></script>
+      <script type="text/javascript" src="/CustomForms/resources/js/jquery.maskMoney.js" ></script>
+      <script type="text/javascript" src="/CustomForms/resources/js/jquery.mask.js"></script>
+
+      <link type="text/css" rel="stylesheet" href="/CustomForms/resources/css/custom-style-guide.css" />
+      <script type="text/javascript" src="/CustomForms/resources/js/custom-js-util.js"></script>
+      <script type="text/javascript" src="/CustomForms/resources/js/custom-js-zoom.js"></script>
+      <script type="text/javascript" src="/CustomForms/resources/js/custom-js-datatables.js"></script>
+
+      <script type="text/javascript" src="custom.js"></script>
+
+      <link type="text/css" rel="stylesheet" href="Styles/css/forms.css" />
+    
+  </head>
+
+  <body>
+    <main class="alinhar">
+      <div class="fluig-style-guide">
+        <form name="form" role="form" id="form">
+          <div id="CABECALHO1">
+            <input type="hidden" name="hddCampoDescritor" id="hddCampoDescritor" />
+            <input type="hidden" name="chaveFormulario" id="chaveFormulario" />
+            <input type="hidden" name="hddGesSol" id="hddGesSol" />
+            <input type="hidden" name="hddNumAnexos" id="hddNumAnexos" />
+            <input type="hidden" name="hddNumProcess" id="hddNumProcess" />
+            <input type="hidden" name="hddCodSolic" id="hddCodSolic" />
+            <input type="hidden" name="hddGestImedCod" id="hddGestImedCod" />
+            <input type="hidden" name="solFluig" id="solFluig" />
+            
+          
+            <div id="divCabecalho" class="col-12 fs-display-flex fs-justify-content-space-between fs-sm-margin-bottom fs-md-padding fs-align-items-center fs-width-max-content">
+              <div class="row">
+                <h2 id="titulo-Principal">
+                  |&nbsp;&nbsp;&nbsp; Registro de Não Conformidade Interno
+                </h2>
+              </div>
+              
+              <div id="icone-dark-mode" class="fs-display-flex fs-justify-content-end fs-text-center">
+                <input type="checkbox" name="changetheme" id="change-theme" />
+                <label for="change-theme" id="icone">
+                  <label id="modeDark"> Modo Escuro</label>
+                  <label id="modeLight"> Modo Claro</label>
+                  <i class="bi bi-sun"></i>
+                  <i class="bi bi-moon"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        <!-- INFORMAÇÕES COLABORADORES -->
+        <fieldset class="fs-sm-padding" id="InformaesColaborador_2">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg==" />
+
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#InformaesColaborador" href="#InformaesColaborador">
+              <span class="fs-text-md"> Informações Colaborador</span>
+            </a>
+          </legend>	
+          
+          <div id="InformaesColaborador" class="panel-collapse collapse show">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label for="NomeSolicitante_131">Nome Solicitante</label>
+                <input type="text" class="form-control" name="NomeSolicitante_131" id="NomeSolicitante_131" readonly>
+                <input type="hidden" name="mailSolicitante" id="mailSolicitante" />
+                
+              </div>
+              
+              <div class="col-md-4">
+                <label for="Matrcula_132">Matrícula</label>
+                <input type="text" class="form-control" name="Matrcula_132" id="Matrcula_132" readonly>
+              </div>
+              
+              <div class="col-md-4">
+                <label for="DataSolicitao_133">Data Solicitação</label>
+                <input type="text" class="form-control" name="DataSolicitao_133" id="DataSolicitao_133" readonly>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label for="gestorImediatoName">Gerência Imediata</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="gestorImediatoName" id="gestorImediatoName" readonly>
+                  <input type="hidden" name="gestorImediatoLogin" id="gestorImediatoLogin" />
+                  <input type="hidden" name="gestorImediatoMail" id="gestorImediatoMail" />
+                  <span id="btn_gestorImediatoName" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="gestorImediatoName">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="contaContabil">Conta Contábil</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="contaContabil" id="contaContabil" readonly>
+                  <span id="btn_contaContabil" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="contaContabil">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="centroCusto">Centro de Custo</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="centroCusto" id="centroCusto" readonly>
+                  <span id="btn_centroCusto" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="centroCusto">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            
+          </div>
+        </fieldset>
+
+        <!-- DADOS GERAIS -->
+        <fieldset class="fs-sm-padding" id="DadosGerais_142">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAK9JREFUSEtjZKAxYKSx+Qx4LZh0QP4/yAF5Dg/JdsjgtoAYH2L1waQD8vsZGBgc0OLnQJ7DQ0dkMUosAIc9OkCPC4otgBmIbtDkA3IH/zMw2hHyIUgeVxChpB50C2B8Qj6k2AJcPkS2mCIfjFoALyJwRfLQDyJaJlNsRcmePIeHruiW4k2mhFxISVFBlAvJtgDmckIGEJLHWVQQawEx1e3A1mjEuJCQGrIrc0IGw+QB85HVGQz6QpcAAAAASUVORK5CYII=" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseDadosRNCG" href="#divCollapseDadosRNCG" >
+              <span class="fs-text-md"> Dados Gerais</span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseDadosRNCG" class="panel-collapse collapse show">
+            
+            <div class="form-group row">
+            
+              <div class="col-md-3">
+            
+                <label for="pedido">Pedido</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="pedido" id="pedido" readonly>
+            
+                  <span id="btn_pedido" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="pedido">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+            
+              </div>
+              
+              <div class="col-md-3">
+                <label for="vlrPedido">Valor Pedido</label>
+                <input type="text" class="form-control" name="vlrPedido" placeholder="0.000.000,00" mask="#000.000.000,00" id="vlrPedido" readonly>
+              </div>
+              
+              <div class="col-md-3">
+                <label for="nrNotaFiscal">Número NF</label>
+                <input type="text" class="form-control" name="nrNotaFiscal" id="nrNotaFiscal" readonly>
+              </div>  
+              
+              <div class="col-md-3">
+
+                <label for="dataEmissao">Data de Emissão NF</label>		
+                <div class="input-group enable-calendar">
+                    <input type="text" class="form-control field-calendar" name="dataEmissao" id="dataEmissao" readonly>
+                    <span class="input-group-addon fs-cursor-pointer" id="btn_dataEmissao">
+                      <span class="fluigicon fluigicon-calendar">
+                    </span>
+                  </span>
+                </div>
+              </div>
+            
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label for="fornecedor">Fornecedor</label>
+                <input type="text" class="form-control" name="fornecedor" id="fornecedor" readonly>
+              </div>
+              
+              <div class="col-md-3">
+                <label for="codFornecedor">Código Fornecedor</label>
+                <input type="text" class="form-control" name="codFornecedor" id="codFornecedor" readonly>
+              </div>
+              
+              <div class="col-md-3">
+                <label for="cgc">CNPJ</label>
+                <input type="text" class="form-control" name="cgc" id="cgc" readonly>
+              </div>
+
+              <div class="col-md-3" id="divBotaoAnexo">
+                <label for="botaoAnexo">Obrigatório anexar a NF</label>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary w-100" id="botaoAnexo">
+                  Anexar NF
+                </button>
+              </div>
+              
+              
+              
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label>Setores RNCI</label>
+                <div class="custom-checkbox custom-checkbox-primary">
+                    <input type="checkbox" id="suprimentos" name="suprimentos" value="true">
+                    <label for="suprimentos">Suprimentos</label>
+                    <a>&nbsp; &nbsp;</a>
+                    <input type="checkbox" id="recebimento" name="recebimento" value="true">
+                    <label for="recebimento">Recebimento</label>
+                    <a>&nbsp; &nbsp;</a>
+                    <input type="checkbox" id="pagamentos" name="pagamentos" value="true">
+                    <label for="pagamentos">Pagamentos</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- RNC SUPRIMENTOS -->
+        <fieldset class="fs-sm-padding" id="RNCISuprimentos_153">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAK9JREFUSEtjZKAxYKSx+Qx4LZh0QP4/yAF5Dg/JdsjgtoAYH2L1waQD8vsZGBgc0OLnQJ7DQ0dkMUosAIc9OkCPC4otgBmIbtDkA3IH/zMw2hHyIUgeVxChpB50C2B8Qj6k2AJcPkS2mCIfjFoALyJwRfLQDyJaJlNsRcmePIeHruiW4k2mhFxISVFBlAvJtgDmckIGEJLHWVQQawEx1e3A1mjEuJCQGrIrc0IGw+QB85HVGQz6QpcAAAAASUVORK5CYII=" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseDadosRNCS" href="#divCollapseDadosRNCS" >
+              <span class="fs-text-md"> Dados RNCI Suprimentos</span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseDadosRNCS" class="panel-collapse collapse show">
+            
+            <div class="form-group row">
+              
+              <div class="col-md-3">
+            
+                <label for="requisicao">Requisição</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="requisicao" id="requisicao" readonly>
+            
+                  <span id="btn_requisicao" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="requisicao">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+            
+              </div>
+              
+
+              <div class="col-md-2">
+                <div class="form-group" id="dvHasError_nfRecebimento"> 
+                  <label>NF lançada pelo recebimento?</label>
+                  <div style="display: inline-block; margin-right: 10px;">
+                    <div class="custom-radio custom-radio-success">
+                      <input type="radio" name="nfRecebimento" value="true" id="nfRecebimentos">
+                      <label for="nfRecebimentos">Sim</label>
+                    </div>
+                  </div>
+                  <div style="display: inline-block;">
+                    <div class="custom-radio custom-radio-danger">
+                      <input type="radio" name="nfRecebimento" value="false" id="nfRecebimenton">
+                      <label for="nfRecebimenton">Não</label>
+                    </div>
+                  </div>
+                </div>    
+              </div>             
+                           
+              
+
+              <div class="form group col-md-7">
+                <div class="row">
+                  <label class="required col-md-2 text-left" for="txtMotSupri">Motivos:</label>
+                </div>
+
+                <div class="custom-checkbox custom-checkbox-primary">
+                  <input type="checkbox" id="Notas_extraviadas" name="Notas_extraviadas" value="Notas_extraviadas">
+                  <label for="Notas_extraviadas">Nota extraviada</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="NFCTESemLanc" name="NFCTESemLanc" value="NFCTESemLanc">
+                  <label for="NFCTESemLanc">Nota e CTe sem lançamento</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="PagNreali" name="PagNreali" value="PagNreali">
+                  <label for="PagNreali">Pagamento em atraso</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="ReqAtras" name="ReqAtras" value="ReqAtras">
+                  <label for="ReqAtras">Requisição gerada próxima ao vencimento</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="OutrosRNCS" name="OutrosRNCS" value="OutrosRNCS">
+                  <label for="OutrosRNCS">Outro</label>
+                </div>
+              </div>
+
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label for="DtAtuVencSup">Data atual de vencimento do boleto</label>
+                <div class="input-group enable-calendar">
+                    <input type="text" class="form-control field-calendar" name="DtAtuVencSup" id="DtAtuVencSup" mask="00/00/0000">
+                    <span class="input-group-addon fs-cursor-pointer" id="btn_DtAtuVencSup">
+                      <span class="fluigicon fluigicon-calendar">
+                    </span>
+                  </span>
+                </div>
+              </div>
+              
+              <div class="col-md-9" id="outrosS">
+                <label for="Outro_161">Outro</label>
+                <input type="text" class="form-control" name="Outro_161" id="Outro_161">
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="fs-sm-padding" id="AproComprador">
+            <legend>
+              <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"/>
+              <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#AprovComp" href="#AprovComp">
+                <span class="fs-text-md">Atuação Suprimentos </span>
+              </a>
+            </legend>
+            
+            <div id="AprovComp" class="panel-collapse collapse show">
+              <div class="form-group row">
+                <div class="col-md-3">
+                  <label for="Prorrog">Prorrogação Realizada?</label> 
+
+                  <div class="custom-radio custom-radio-success">
+                    <input type="radio" name="prorrog" value="true" id="prorrogs">
+                    <label for="prorrogs">Sim</label>
+                  </div>
+
+                  <div class="custom-radio custom-radio-danger">
+                    <input type="radio" name="prorrog" value="false" id="prorrogn">
+                    <label for="prorrogn">Não</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">	
+                  <label for="RespoProrrog">Responsável</label>
+                  <input type="text" class="form-control" name="RespoProrrog" id="RespoProrrog" readonly>
+                  <input type="hidden" name="RespoProrrogLogin" id="RespoProrrogLogin" />
+                  <input type="hidden" name="RespoProrrogMail" id="RespoProrrogMail" />
+                </div>
+
+                <div class="col-md-3">
+                  <label for="dataProrrog">Data</label>
+                  <input type="text" class="form-control" name="dataProrrog" id="dataProrrog" readonly>
+                </div>
+              </div> 
+              
+              <div class="form-group row">
+                <div class="col-md-3">
+
+                  <label for="DtVencComp">Nova data de vencimento</label>
+
+                  <div class="input-group enable-calendar">
+                      <input type="text" class="form-control field-calendar" name="DtVencComp" id="DtVencComp" mask="00/00/0000">
+
+                      <span class="input-group-addon fs-cursor-pointer" id="btn_DtVencComp">
+                        <span class="fluigicon fluigicon-calendar"></span>
+                      </span>
+
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="DescriProrrog">Descrição do Acordo</label>
+                  <textarea class="form-control" name="DescriProrrog" id="DescriProrrog"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- RNC RECEBIMENTO -->
+        <fieldset class="fs-sm-padding" id="RNCIRecebimento_163">
+          <legend>
+            <img class="iconesImg"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAK9JREFUSEtjZKAxYKSx+Qx4LZh0QP4/yAF5Dg/JdsjgtoAYH2L1waQD8vsZGBgc0OLnQJ7DQ0dkMUosAIc9OkCPC4otgBmIbtDkA3IH/zMw2hHyIUgeVxChpB50C2B8Qj6k2AJcPkS2mCIfjFoALyJwRfLQDyJaJlNsRcmePIeHruiW4k2mhFxISVFBlAvJtgDmckIGEJLHWVQQawEx1e3A1mjEuJCQGrIrc0IGw+QB85HVGQz6QpcAAAAASUVORK5CYII=" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseDadosRNCR" href="#divCollapseDadosRNCR" >
+              <span class="fs-text-md"> Dados RNCI Recebimento</span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseDadosRNCR" class="panel-collapse collapse show">
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label for="estabelec">Estabelecimento</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="estabelec" id="estabelec" readonly>
+                  <span id="btn_estabelec" class="input-group-addon group-zoom no-view zoom-click btn-primary" data-event="estabelec">
+                    <span class="fluigicon fluigicon-zoom-in "></span>
+                  </span>
+                </div>
+              </div>
+              
+              <div class="form group col-md-9 col-sm-3">
+                <div class="row">
+                    <label class="required col-md-2 text-left" for="txtMotReceb">Motivos:</label>
+                </div>
+              
+                <div class="custom-checkbox custom-checkbox-primary">
+                  <input type="checkbox" id="ForaCompet" name="ForaCompet" value="ForaCompet">
+                  <label for="ForaCompet">Fora de Competência</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="ForaPrazInt" name="ForaPrazInt" value="ForaPrazInt">
+                  <label for="ForaPrazInt">Fora do Prazo Interno</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="ForaRecbF" name="ForaRecbF" value="ForaRecbF">
+                  <label for="ForaRecbF">Fora do Recebimento Fiscal</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="MovOrcament" name="MovOrcament" value="MovOrcament">
+                  <label for="MovOrcament">Movimentação Orçamentária</label>
+                  <a>&nbsp; &nbsp</a>
+                  <input type="checkbox" id="OutrosRNCR" name="OutrosRNCR" value="OutrosRNCR">
+                  <label for="OutrosRNCR">Outro</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-3">
+                <label for="dataRecebimento">Data de Vencimento a ser considerada no lançamento</label>
+                <div class="input-group enable-calendar">
+                  <input type="text" class="form-control field-calendar" name="dataRecebimento" id="dataRecebimento" mask="00/00/0000">
+                  <span class="input-group-addon fs-cursor-pointer" id="btn_dataRecebimento">
+                    <span class="fluigicon fluigicon-calendar"></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-9" id="outrosR">
+                <label for="Outro_193">Outro</label>
+                <input type="text" class="form-control" name="Outro_193" id="Outro_193">
+              </div>
+            </div>
+          </div> 
+        </fieldset>
+
+        <!-- RNC PAGAMENTOS -->
+        <fieldset class="fs-sm-padding" id="RNCIPagamentos_232">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAK9JREFUSEtjZKAxYKSx+Qx4LZh0QP4/yAF5Dg/JdsjgtoAYH2L1waQD8vsZGBgc0OLnQJ7DQ0dkMUosAIc9OkCPC4otgBmIbtDkA3IH/zMw2hHyIUgeVxChpB50C2B8Qj6k2AJcPkS2mCIfjFoALyJwRfLQDyJaJlNsRcmePIeHruiW4k2mhFxISVFBlAvJtgDmckIGEJLHWVQQawEx1e3A1mjEuJCQGrIrc0IGw+QB85HVGQz6QpcAAAAASUVORK5CYII=" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseDadosRNCP" href="#divCollapseDadosRNCP">
+              <span class="fs-text-md"> Dados RNCI Pagamentos</span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseDadosRNCP" class="panel-collapse collapse show">
+            <div class="form-group row">
+              <!-- Motivos (3 colunas) -->
+              <div class="form-group col-md-3 col-sm-3">
+                <label class="required" for="txtMotPagam">Motivos:</label>
+                <div>
+                  <div class="custom-checkbox custom-checkbox-primary" style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="ForaPrazo" name="ForaPrazo" value="ForaPrazo">
+                    <label for="ForaPrazo">Fora do Prazo</label>
+                  </div>
+                  <div class="custom-checkbox custom-checkbox-primary" style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="PagamJuros" name="PagamJuros" value="PagamJuros">
+                    <label for="PagamJuros">Pagamento com Juros</label>
+                  </div>
+                  <div class="custom-checkbox custom-checkbox-primary" style="display: inline-block;">
+                    <input type="checkbox" id="OutrosRNCP" name="OutrosRNCP" value="OutrosRNCP">
+                    <label for="OutrosRNCP">Outro</label>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- NF Vencida? (2 colunas) -->
+              <div class="form-group col-md-2">
+                <label>NF Vencida?</label>
+                <div>
+                  <div class="custom-radio custom-radio-success" style="display: inline-block; margin-right: 10px; margin-left: 10px;">
+                    <input type="radio" name="nfVencida" value="true" id="nfVencidas">
+                    <label for="nfVencidas">Sim</label>
+                  </div>
+                  <div class="custom-radio custom-radio-danger" style="display: inline-block;">
+                    <input type="radio" name="nfVencida" value="false" id="nfVencidan">
+                    <label for="nfVencidan">Não</label>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Data de Vencimento (3 colunas) -->
+              <div class="form-group col-md-3">
+                <label for="dataVencimentoPagamentos">Data de Vencimento</label>
+                <div class="input-group enable-calendar">
+                  <input type="text" class="form-control field-calendar" name="dataVencimentoPagamentos" id="dataVencimentoPagamentos" mask="00/00/0000">
+                  <span class="input-group-addon fs-cursor-pointer" id="btn_dataVencimentoPagamentos">
+                    <span class="fluigicon fluigicon-calendar"> </span>
+                  </span>
+                </div>
+              </div>
+            
+              <!-- Houve Juros? (2 colunas) -->
+              <div class="form-group col-md-2">
+                <label>Houve juros sobre o atraso?</label>
+                <div>
+                  <div class="custom-radio custom-radio-success" style="display: inline-block; margin-right: 10px;">
+                    <input type="radio" name="houveJuros" value="true" id="houveJuross">
+                    <label for="houveJuross">Sim</label>
+                  </div>
+                  <div class="custom-radio custom-radio-danger" style="display: inline-block;">
+                    <input type="radio" name="houveJuros" value="false" id="houveJurosn">
+                    <label for="houveJurosn">Não</label>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Valor Juros (2 colunas) -->
+              <div class="form-group col-md-2">
+                <label for="Moeda_205">Valor Juros:</label>
+                <input type="text" class="form-control" name="Moeda_205" mask="#000.000.000,00" placeholder="0.000.000,00" id="Moeda_205">
+              </div>
+            </div>
+            
+             
+              <div class="row">
+                <div class="col-md-12" id="outrosP">
+                  <label for="Outro_194">Outro</label>
+                  <input type="text" class="form-control" name="Outro_194" id="Outro_194">
+                </div>
+              </div>
+
+              <fieldset class="fs-sm-padding" id="Financeiro_207">
+                <legend>
+                  <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAtNJREFUSEvFlU1IVFEUx//n+ZlKBGlFxdwJXASFLZKKoN5TCkoJpKAiXLQQLGrelEG0qNTatLGaNypYUYS0iKASpEDKeRYIQZKbyGqKeZNREApCGDkz79TIaPM+xsZAurt7z8fvnPu/H4QFHrTA+TEnQHtUXkDFsX3M2AVgAwAvAAYQIeZhSNLj/OKl9xsrh2KZCs0ICOpiNwOdqaRzNRpmk4/4q6NP3ZxcAYGQt4WIm+exfSYIp1XZaLPHOACa7m0F+Pw8ks+6EvEJnxwNpMdaAFq/qIWE3kzJVcWY9td0kdTBbZhM2OaXjcEZ4yygI1RWkqCitwBW2iITAG4mmDpPVkWGpwEh7xYQ3wCwzoUyUlBSWjEj/CxA071HAU6KahkEavIpkSv29Y6Qd0WC+AOAIruNTarzV0d6kut/AAOiF4xau7MUj5ce3/F5LKCLbgLqAcRA2KzKxitNFw8A1LkUdc2nRBotgKAuRhlY5Wh5Mq9QrQn/1HTPC4A2ZSU+YUiVjUprB7r4AaDQUQ3RQZ8cuZu+rj0rL4MZOwPADyDHBTqmKkapHTABYLGL8xRAl+L58UDT1tHxdHtgQBwjRrtLzISqGEvsgDcA1ma3BdyjytG6q0/WLJdyza8uMa9VxVhvAQR0cYeAQw5nKW+Zuj38TdNFGwEHkjoR821fVfRw6iR9cWxrym4VOeSpZ6JuZzXcrCrRC26dabq4DqDBeYp4v0+J3rMALg+uXpQ7lTPy+1J5HMkYbSwluvzy6PukLdDv2UiS1AzwHhfwO0zmVSRPngWQnLTrnp0mqC+TDtk8FYCpqMqn5zM5nI9dSJwF4WJWYtucGKz6lWgwfdn1uQ7q4hwDrek3/S/ABBGfsr+kji2yXKZ+UUsSulxvt5UWhkkNanVkwK2IOb/MWyFv4XeJ97KJGhBVACxSX+ZHAC/B3DeO6MOWKsQzdfh/P/1/Edoe8wtNKwAozedQsQAAAABJRU5ErkJggg==" />
+                  <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseDadosFinanceiro" href="#divCollapseDadosFinanceiro" >
+                    <span class="fs-text-md"> Financeiro</span>
+                  </a>
+                </legend>
+                
+                <div id="divCollapseDadosFinanceiro" class="panel-collapse collapse show">
+                  <div class="form-group row">
+                    
+                    <div class="col-md-4">
+                      <label for="formaPagamento">Forma de Pagamento</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="formaPagamento" id="formaPagamento" readonly>
+                        <span id="btn_formaPagamento" class="input-group-addon group-zoom no-view   zoom-click btn-primary" data-event="formaPagamento">
+                          <span class="fluigicon fluigicon-zoom-in "></span>
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <label for="condPagamento">Condição de Pagamento</label>
+                      <input type="text" class="form-control" name="condPagamento" id="condPagamento">
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <label for="instBancario">Instituição Bancaria</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="instBancario" id="instBancario" readonly>
+                        <span id="btn_instBancario" class="input-group-addon group-zoom no-view   zoom-click btn-primary" data-event="instBancario">
+                          <span class="fluigicon fluigicon-zoom-in "></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-4">
+                      <label for="ContaCorrente_215">Conta Corrente</label>
+                      <input type="text" class="form-control" name="ContaCorrente_215" id="ContaCorrente_215" readonly>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <label for="Agncia_216">Agência</label>
+                      <input type="text" class="form-control" name="Agncia_216" id="Agncia_216" readonly>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <label for="ChavePix_217">Chave Pix</label>
+                      <input type="text" class="form-control" name="ChavePix_217" id="ChavePix_217" readonly>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </fieldset>
+
+        <!-- PLANO DE AÇÃO -->
+        <fieldset id="divPlanoA" class="fs-sm-padding">
+          <legend class="fs-text-lg">
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANlJREFUSEtjZKAxYKSx+Qz0s2DiPgV/Rqb/HQwMDBqYvmI8zcDE4p1nd+c1qT6G+2DyAfkn/xkYpHEZwMjAcP0321+bIqsn70ixBG7BpAPy/0nRiM8h/xgZSvLtH24DqaG6BVBD7+U6PFTGakGew0OKIh4WEjBzMHwwoBaguw5bPFDkg6FpAaHkix5nJAcRzS1AjsihGQd09QExZRXJkUyMofh8iVxUPGRgYJAj1UAc6h/kOTxURCnsoBVOJwMDgzqFllz6z8hQiVFcU2goTu0UFc3EOIrmFgAAQuypGTRXGuIAAAAASUVORK5CYII=" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseIPA" href="#divCollapseDadosIPA">
+              <span class="fs-text-md"> Inclusão de Plano de Ação</span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseDadosIPA" class="panel-collapse collapse show">
+            <div id="fieldsetPlanoA">
+              <input type="hidden" id="hddJsonTblPlanoA1" name="hddJsonTblPlanoA1"/>
+              <input type="hidden" id="hddJsonTblPlanoA2" name="hddJsonTblPlanoA2"/>
+              <input type="hidden" id="hddJsonTblPlanoA3" name="hddJsonTblPlanoA3"/>
+              <input type="hidden" id="hddJsonTblPlanoA4" name="hddJsonTblPlanoA4"/>
+              <input type="hidden" id="hddJsonTblPlanoA5" name="hddJsonTblPlanoA5"/>
+              <input type="hidden" id="hddJsonTblPlanoA6" name="hddJsonTblPlanoA6"/>
+              <input type="hidden" id="hddJsonTblPlanoA7" name="hddJsonTblPlanoA7"/>
+              <input type="hidden" id="hddJsonTblPlanoA8" name="hddJsonTblPlanoA8"/>
+              <input type="hidden" id="hddJsonTblPlanoA9" name="hddJsonTblPlanoA9"/>
+              <input type="hidden" id="hddJsonTblPlanoA10" name="hddJsonTblPlanoA10"/>
+              
+              <table id="tblPlanoA" class="display nowrap" style="width: 150%" ></table>
+
+              <div class="row fs-display-flex fs-justify-content-flex-end">
+                <button type="button" id="btnAddPlanoA" class="btn btn-default btn-sm" style="margin: 1%; display:none;" onclick="Javascript:IncModPlanoA( 'incluir' );">
+                  <div class="form-inline">
+                    <span style="vertical-align: top; padding-right: 5px">Adicionar</span>
+                    <span class="flaticon flaticon-add-plus icon-xs"></span>
+                  </div>
+                </button>
+                
+                <button type="button" id="btnUpdPlanoA" class="btn btn-default btn-sm" style="margin: 1%; display:none;" onclick="Javascript:IncModPlanoA( 'modifica' );">
+                  <div class="form-inline">
+                    <span style="vertical-align: top; padding-right: 5px">Modificar</span>
+                    <span class="flaticon flaticon-change-layout icon-xs"></span>
+                  </div>
+                </button>
+                
+                <button type="button" id="btnDelPlanoA"  class="btn btn-default btn-sm" style="margin: 1%; display:none;" onclick="removeRow(tablePlanoA, 'tblPlanoA', columnsPlanoA);">
+                  <div class="form-inline">
+                    <span style="vertical-align: top; padding-right: 5px">Eliminar</span>
+                    <span class="flaticon flaticon-trash icon-xs"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>  
+        </fieldset>
+
+        <!-- APROVAÇÕES -->
+        <fieldset class="fs-sm-padding" id="fsAprovadores">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseAprov" href="#divCollapseAprov">
+              <span class="fs-text-md"> Aprovações </span>
+            </a>
+          </legend>
+          
+          <div id="divCollapseAprov" class="panel-collapse collapse show">
+            <fieldset class="fs-sm-padding" id="fsGestorSolicitante">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"/>
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#dvGestorSolicitante" href="#dvGestorSolicitante">
+                  <span class="fs-text-md"> Gerência do Solicitante </span>
+                </a>
+              </legend>
+              
+              <div id="dvGestorSolicitante" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_aprovGestorSolicitante"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                          <input type="radio" name="aprovGestorSolicitante" id="aprovGestorSolicitante_s" value="true">
+                          <label for="aprovGestorSolicitante_s">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="aprovGestorSolicitante" value="false" id="aprovGestorSolicitante_n">
+                            <label for="aprovGestorSolicitante_n">Não</label>
+                        </div>
+                    </div>    
+                  </div>
+
+                  <div class="col-md-4">	
+                    <label for="RespoSol">Responsável</label>
+                    <input type="text" class="form-control" name="gestorSolicitante_name" id="gestorSolicitante_name" readonly>
+                    <input type="hidden" class="form-control" name="gestorSolicitante_login" id="gestorSolicitante_login">
+                    <input type="hidden" class="form-control" name="gestorSolicitante_mail" id="gestorSolicitante_mail">
+
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <label for="dtAprovGestorSolicitante">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="dtAprovGestorSolicitante" id="dtAprovGestorSolicitante" readonly>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="justAprovGestorSolicitante">Justificativa</label>
+                    <textarea class="form-control" name="justAprovGestorSolicitante" id="justAprovGestorSolicitante"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fs-sm-padding" id="AprovSupri">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"/>
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#AprovSup" href="#AprovSup">
+                  <span class="fs-text-md"> Gerência Suprimentos </span>
+                </a>
+              </legend>
+              
+              <div id="AprovSup" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_acordoSup"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="acordoSup" value="true" id="acordoSups">
+                            <label for="acordoSups">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="acordoSup" value="false" id="acordoSupn">
+                            <label for="acordoSupn">Não</label>
+                        </div>
+                    </div>    
+                  </div>                  
+
+                  <div class="col-md-4">	
+                    <label for="RespoSup">Responsável</label>
+                    <input type="text" class="form-control" name="RespoSup" id="RespoSup" readonly>
+                    <input type="hidden" class="form-control" name="RespoSup_login" id="RespoSup_login">
+                    <input type="hidden" class="form-control" name="RespoSup_mail" id="RespoSup_mail">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="DataAprovSup">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="DataAprovSup" id="DataAprovSup" readonly>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="JustiSup">Justificativa</label>
+                    <textarea class="form-control" name="JustiSup" id="JustiSup"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fs-sm-padding" id="AprovReceb">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC" />
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#AprovRec" href="#AprovRec">
+                  <span class="fs-text-md"> Gerência Financeiro</span>
+                </a>
+              </legend>
+              
+              <div id="AprovRec" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_acordoRec"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="acordoRec" value="true" id="acordoRecs">
+                            <label for="acordoRecs">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="acordoRec" value="false" id="acordoRecn">
+                            <label for="acordoRecn">Não</label>
+                        </div>
+                    </div>    
+                  </div> 
+
+                  <div class="col-md-4">	
+                    <label for="RespoRec">Responsável</label>
+                    <input type="text" class="form-control" name="RespoRec" id="RespoRec" readonly>
+                    <input type="hidden" class="form-control" name="RespoRec_login" id="RespoRec_login">
+                    <input type="hidden" class="form-control" name="RespoRec_mail" id="RespoRec_mail">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="DataAprovRec">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="DataAprovRec" id="DataAprovRec" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="JustiRec">Justificativa</label>
+                    <textarea class="form-control" name="JustiRec" id="JustiRec"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </fieldset>
+
+        <!-- GESTÃO PLANO DE AÇÃO -->
+        <fieldset class="fs-sm-padding" id="GestaoPA">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg==" />
+
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#GestaoPlanoA" href="#GestaoPlanoA">
+              <span class="fs-text-md"> Gestão Plano de Ação</span>
+            </a>
+          </legend>	
+          
+          <div id="GestaoPlanoA" class="panel-collapse collapse show">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label for="DataRegistro">Data Registro</label>
+                <input type="text" class="form-control" name="DataRegistro" id="DataRegistro" readonly>
+              </div>
+          
+              <div class="col-md-4">
+                <div class="form-group" id="dvHasError_acordoPag"> 
+                    <label>Status Plano de Ação</label>
+                    <div class="custom-checkbox custom-checkbox-success">
+                      <input type="checkbox" name="aprovPlanoAcao" value="true" id="aprovPlanoAcaos">
+                      <label for="aprovPlanoAcaos">Concluído</label>
+                  </div>                  
+                </div>
+
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="JustiGPA">Descrição Registro</label>
+                <textarea class="form-control" name="JustiGPA" id="JustiGPA"></textarea>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- APROVAÇÃO PLANO DE AÇÃO -->
+        <fieldset class="fs-sm-padding" id="fsAprovadoresPA">
+          <legend>
+            <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC" />
+            <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#divCollapseAprovPA" href="#divCollapseAprovPA">
+              <span class="fs-text-md"> Aprovações Plano de Ação</span>
+            </a>
+          </legend>
+          
+          <div id="div#divCollapseAprovPA" class="panel-collapse collapse show">
+            <fieldset class="fs-sm-padding" id="fsGrSolicitantePA">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"/>
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#dvGrSolicitantePA" href="#dvGrSolicitantePA">
+                  <span class="fs-text-md"> Gerência Solicitante </span>
+                </a>
+              </legend>
+              
+              <div id="dvGrSolicitantePA" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_aprovGrSolicitantePA"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                          <input type="radio" name="aprovGrSolicitantePA" id="aprovGrSolicitantePA_s" value="true">
+                          <label for="aprovGrSolicitantePA_s">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="aprovGrSolicitantePA" value="false" id="aprovGrSolicitantePA_n">
+                            <label for="aprovGrSolicitantePA_n">Não</label>
+                        </div>
+                    </div>    
+                  </div>
+
+                  <div class="col-md-4">	
+                    <label for="RespoSol">Responsável</label>
+                    <input type="text" class="form-control" name="GrSolicitantePA_name" id="GrSolicitantePA_name" readonly>
+                    <input type="hidden" class="form-control" name="GrSolicitantePA_login" id="GrSolicitantePA_login">
+                    <input type="hidden" class="form-control" name="GrSolicitantePA_mail" id="GrSolicitantePA_mail">
+
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <label for="dtAprovGrSolicitantePA">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="dtAprovGrSolicitantePA" id="dtAprovGrSolicitantePA" readonly>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="justAprovGrSolicitantePA">Justificativa</label>
+                    <textarea class="form-control" name="justAprovGrSolicitantePA" id="justAprovGrSolicitantePA"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fs-sm-padding" id="fsGrSupplyPA">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC"/>
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#GrSupplyPA" href="#GrSupplyPA">
+                  <span class="fs-text-md"> Gerência Supply Chain </span>
+                </a>
+              </legend>
+              
+              <div id="GrSupplyPA" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_GrSupplyPA"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="AprovGrSupplyPA" value="true" id="AprovGrSupplyPAs">
+                            <label for="AprovGrSupplyPAs">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="AprovGrSupplyPA" value="false" id="AprovGrSupplyPAn">
+                            <label for="AprovGrSupplyPAn">Não</label>
+                        </div>
+                    </div>    
+                  </div>                  
+
+                  <div class="col-md-4">	
+                    <label for="RespoGrSupplyPA">Responsável</label>
+                    <input type="text" class="form-control" name="RespoGrSupplyPA" id="RespoGrSupplyPA" readonly>
+                    <input type="hidden" class="form-control" name="RespoGrSupplyPA_login" id="RespoGrSupplyPA_login">
+                    <input type="hidden" class="form-control" name="RespoGrSupplyPA_mail" id="RespoGrSupplyPA_mail">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="DataAprovGrSupplyPA">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="DataAprovGrSupplyPA" id="DataAprovGrSupplyPA" readonly>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="JustiGrSupplyPA">Justificativa</label>
+                    <textarea class="form-control" name="JustiGrSupplyPA" id="JustiGrSupplyPA"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fs-sm-padding" id="fsGrFinanPA">
+              <legend>
+                <img class="iconesImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA7BJREFUSEvFlW1oW3UUxn/nJl1XWwt2imhjbuoGio4qw/lpbZIi4iZDVOZENmEgTmxz04FMUNGI+kmsbbIJug/zDWR+kOFLRXEmqVr9UnxjMme35t5WVMThqO6tyT3u3yalTZtaPwzPt3vvuc/z/J9z/ucIFzjkAuOzJEF6cE29NE7drcptwA1ABFCgIKrfYFkfrmhc9c7Om0amagmtSZDJ2RsVXiqDLnXQUfX1oWSXd2ixpEUJBrKRlIg+Vf7BAw7gywcl4VvzLgg3quhm4B4gNJ0nPOJE3ReqSRYQzAGfFPG39XSOvycybcuCSCnWqqHIFlXdDzSAJp2Yl56bOI8gnQtvBnkXOG35ur6nyzu8nCZID7XdjO9/AVi+arQ37n1e+W+WYG/2sqaSXHQUuEJUtyfi3pvLAa/kpLORXkRfBI7UN13aXin8LEEmZz+ssPe8rz8kou7aWrZUAPs/abs8ENT7ErGCASV1+LoVLb//XZgRKHcm4oWDM6UpRzpnDwIbVehJRl1DVDP6DoVag4FAHlitojuTUe8Vk5zO2c8BjwH7nJj74DyCTM6eUGgtBXT1rg7veC30Mrjx2wZGAyod3fHCrya/PxveYIl8BnztxNx11Sc4ZTrhYpWGHfHCGfMxkwvvLhUDr/XeMvabeTbgdYHAkMLVBrxk0bmr0/2lIqZvONQSPBf4A/jTibmXVBNMAk2ngyubH93w4+RA3u4WZQ8wViyVOoKWChI03WGUj6HFTif+88Tck6a/WtPMmamTwKQTc5urCY4A14iU2hPRie/T2daQSDBfVjsG1JlLJXBctRitBjdge4bsdb7PiGkUJ+ZeX12DtxTuBXY7Mff56aJlW0NI0HhqZpCJAlrsWAx8Jt9+AuGZ88V/w4m5988jGMiFtwvyOshPJ6KFa1OCP4fkS6C4FHgqS7BF7GNAWEW3JqPe2/MI+oZDDcFzAWNTGJUdTrzwasXfTN5uswgWu6PHxmt110AunBDEjImjnKprdzaNnp1HMK0233Yr6n/0X0dFf+6q9RbWsBkV4Mec2LixdToWDru8/bgozwInLdVtPXHv/VqqzbBryUe2gu4DGlESTtw1nTcbi47rdC78JMjT5awxFT0gqoP1U3Xfna23Vqg/tRaVO0R0C3ClWUKKJpMxL1MtpubCSX9q3y4WL5vbXesE5fej+PKA01Uwo2NBLLky92cjK/+y9C712YRIO6i5ZGY3mG4ZQfXjE3gHU3GKtUT8v0v/X6xZ1ud/AHV3cChrP7nZAAAAAElFTkSuQmCC" />
+                <a class="collapse-icon down fs-no-text-underline" data-toggle="collapse" data-parent="#GrFinanPA" href="#GrFinanPA">
+                  <span class="fs-text-md"> Gerência Financeira</span>
+                </a>
+              </legend>
+              
+              <div id="GrFinanPA" class="panel-collapse collapse show">
+                <div class="form-group row">
+
+                  <div class="col-md-3">
+                    <div class="form-group" id="dvHasError_acordoGrFinanPA"> 
+                        <label>De acordo?</label>
+                        <div class="custom-radio custom-radio-success">
+                            <input type="radio" name="acordoGrFinanPA" value="true" id="acordoGrFinanPAs">
+                            <label for="acordoGrFinanPAs">Sim</label>
+                        </div>
+                        <div class="custom-radio custom-radio-danger">
+                            <input type="radio" name="acordoGrFinanPA" value="false" id="acordoGrFinanPAn">
+                            <label for="acordoGrFinanPAn">Não</label>
+                        </div>
+                    </div>    
+                  </div> 
+
+                  <div class="col-md-4">	
+                    <label for="RespoGrFinanPA">Responsável</label>
+                    <input type="text" class="form-control" name="RespoGrFinanPA" id="RespoGrFinanPA" readonly>
+                    <input type="hidden" class="form-control" name="RespoGrFinanPA_login" id="RespoGrFinanPA_login">
+                    <input type="hidden" class="form-control" name="RespoGrFinanPA_mail" id="RespoGrFinanPA_mail">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="DataAprovGrFinanPA">Data Aprovação/Reprovação</label>
+                    <input type="text" class="form-control" name="DataAprovGrFinanPA" id="DataAprovGrFinanPA" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="JustiGrFinanPA">Justificativa</label>
+                    <textarea class="form-control" name="JustiGrFinanPA" id="JustiGrFinanPA"></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </fieldset>
+        <div class="panel-title-ferbasa" width="100%"><label>|&nbsp;&nbsp;&nbsp;É obrigatório o anexo da NF.</label></div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>   
