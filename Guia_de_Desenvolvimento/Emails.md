@@ -7,6 +7,7 @@
     - TITULO
     - INFOEMAIL
     - SUPORTE
+	- LINK
   ```
     
 2. Código HTML
@@ -59,8 +60,8 @@
           <table style="padding: 0; font-family: Montserrat, sans-serif; font-size: 14px;">
               <tr>
                   <td colspan="2" style="padding: 0;">
-                     Este e-mail é automático, favor não responder
-                  </td>
+                   	<a href="${LINK}" style="color: #A3BD31;">Clique <span style="padding-inline: 20px;">&#128073 AQUI &#128072</span> para acessar a Solicitação!</a>
+   			      </td>
                   <td style="padding: 0;">
                      <table>
                       <tr>
@@ -231,20 +232,21 @@
 
 3. Global para envio de email
    ```js
-     function enviarEmail(nameSolicitante, solFluig, dataSolicitacao, titulo, mail, loginSolicitante, destinatarios) {
-   	var parametros = new java.util.HashMap();
+     function enviarEmail(nameSolicitante, solFluig, dataSolicitacao, titulo, mail, loginSolicitante, destinatarios, link) {
+   		 var parametros = new java.util.HashMap();
          var mailSuporte = getMails("ZZZ_Fluig");
          parametros.put("SOLICITANTE"		, nameSolicitante);
-   	parametros.put("SOLFLUIG"		, String(solFluig));
-   	parametros.put("DATASOLICITACAO"	, dataSolicitacao);
+   		 parametros.put("SOLFLUIG"		, String(solFluig));
+   		 parametros.put("DATASOLICITACAO"	, dataSolicitacao);
          parametros.put("TITULO"	            , titulo);
-   	parametros.put("INFOEMAIL"	      , mail);
+   	     parametros.put("INFOEMAIL"	      , mail);
          parametros.put("SUPORTE"			, mailSuporte);
+   		 parametros.put("LINK"			    , link);
    
          log.info("------> R001.Dados - " + loginSolicitante + ", " + parametros + ", " + destinatarios);
    
    	try{
-   		parametros.put("subject", "Processo Admissional - ( " + solFluig + " )");
+   		parametros.put("subject", "Nome processo - ( " + solFluig + " )");
    		
    		notifier.notify(loginSolicitante, "EmailPadronizado", parametros, destinatarios, "text/html");
    
@@ -252,6 +254,101 @@
    		log.info("------> R001.AFTERTASKCOMPLETE ERROR - " + e); 
    	}
    }
+   ```
+
+4. Montagem de links
+   - Assumir atividade
+   ```js
+   function criaLink(loginSolicitante, solFluig){
+	      var constraints = [];
+	      constraints.push(DatasetFactory.createConstraint("processHistoryPK.processInstanceId", solFluig, solFluig, ConstraintType.MUST));
+	
+	      var data = DatasetFactory.getDataset("processHistory", null, constraints, null);
+	      var movimentos = [];
+	
+	      if (data != null && data.rowsCount > 0) {
+	            for (var i = 0; i < data.rowsCount; i++) {
+	                  var movimentoStr = data.getValue(i, "processHistoryPK.movementSequence");
+	                  var movimento = parseInt(movimentoStr, 10);
+	                  if (!isNaN(movimento)) {
+	                        movimentos.push(movimento);
+	                  }
+	            }
+	
+	            if (movimentos.length > 0) {
+	                  var maiorMovimento = Math.max.apply(null, movimentos) +1;
+	
+	                  linkCompleto =
+	                        "https://intranet.millpar.com/portal/p/Millpar/pageworkflowview" +
+	                        "?app_ecm_workflowview_processInstanceId=" + solFluig +
+	                        "&app_ecm_workflowview_currentMovto=" + maiorMovimento +
+	                        "&app_ecm_workflowview_taskUserId=" + loginSolicitante +
+	                        "&app_ecm_workflowview_managerMode=false";
+	
+	                  log.info("Link de histórico criado: " + linkCompleto);
+	            } else {
+	                  log.warn("Nenhum movimento encontrado para o processo: " + solFluig);
+	            }
+	      } else {
+	            log.warn("Dataset 'processHistory' retornou vazio ou null para o processo: " + solFluig);
+	      }
+	      return linkCompleto;
+	}
+   ```
+   - Assumir Tarefa com widget
+   ```js
+   Link Central de tarefas = "https://intranet.millpar.com/portal/p/Millpar/home?sol=" + solFluig + "&showRedirect=1";
+   ```
+    * Widget
+      ```js
+      var wd_N001 = SuperWidget.extend({
+		    init: function () {
+		        const urlParams = new URLSearchParams(window.location.search);
+		        const showRedirect = urlParams.get("showRedirect");
+		        const solFluig = urlParams.get("sol");
+		
+		        if (showRedirect && solFluig) {
+		            FLUIGC.modal({
+		                title: 'Atenção!',
+		                content: '<p style="font-size:16px;">Você será redirecionado ao clicar em OK.</p>',
+		                id: 'modal_aguarde',
+		                actions: [{
+		                    label: 'OK',
+		                    autoClose: true
+		                }]
+		            });
+		
+		            // Aguarda o modal ser renderizado e associa o evento de clique
+		            setTimeout(function () {
+		                const buttons = document.querySelectorAll('#modal_aguarde .modal-footer button');
+		
+		                buttons.forEach(function (btn) {
+		                    if (btn.innerText.trim() === 'OK') {
+		                        console.log("Botão OK encontrado, adicionando evento de clique.");
+		                        btn.addEventListener('click', function () {
+		                            console.log("Botão OK clicado, buscando login...");
+		                            var userCode = WCMAPI.userCode;
+		                            if (userCode) {
+		                                console.log("Código do usuário encontrado:", userCode);
+		                                var redirectUrl = "https://intranet.millpar.com/portal/p/Millpar/pageworkflowview" +
+		                                    "?app_ecm_workflowview_detailsProcessInstanceID=" + solFluig +
+		                                    "&app_ecm_workflowview_taskUserId=" + userCode;
+		                                console.log("Redirecionando para:", redirectUrl);
+		                                window.location.href = redirectUrl;
+		                            } else {
+		                                console.error("Código do usuário não encontrado.");
+		                            }
+		                        });
+		                    }
+		                });
+		            }, 500);
+		        }
+		    }
+		});
+      ```
+   - Consulta Solicitação
+   ```js
+   linkProcess = linkProcess.replace("app_ecm_workflowview_processInstanceId", "app_ecm_workflowview_detailsProcessInstanceID");
    ```
 
 # Exemplo de Uso
@@ -271,7 +368,7 @@
                   '  </td>'+
                   '</tr>';
             destinatarios = getMails("C002 - Solicitantes");
-            enviarEmail(nameSolicitante, solFluig, dataSolicitacao, titulo, mail, loginSolicitante, destinatarios);
+            enviarEmail(nameSolicitante, solFluig, dataSolicitacao, titulo, mail, loginSolicitante, destinatarios, link);
       }
   ```
 
