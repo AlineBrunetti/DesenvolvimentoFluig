@@ -1,0 +1,1170 @@
+<html>
+	<head>
+		<!-- CSS básico -->
+		<link rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css" />
+		<link rel="stylesheet" href="/CustomForms/resources/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="/CustomForms/resources/css/datatables.min.css" />
+		<link rel="stylesheet" href="/CustomForms/resources/css/custom-style-guide.css" />
+		<link rel="stylesheet" href="Styles/css/forms.css" />
+		<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+		<!-- jQuery (apenas uma versão) -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+		<!-- Bootstrap (carregado uma vez, após o jQuery) -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>	
+		<!-- Componentes do Fluig (depois do jQuery) -->
+		<script src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+		<script src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+		<script src="/portal/resources/js/mustache/mustache-min.js"></script>
+		<script src="/webdesk/vcXMLRPC.js"></script>
+
+		<!-- Plugins auxiliares -->
+		<script src="/CustomForms/resources/js/datatables.min.js"></script>
+		<script src="/CustomForms/resources/js/jquery.priceFormat.js"></script>
+		<script src="/CustomForms/resources/js/jquery.maskMoney.js"></script>
+		<script src="/CustomForms/resources/js/jquery.mask.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+
+
+
+		<!-- DataTables Export -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+		<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+
+		<!-- Seus scripts -->
+		<script src="/CustomForms/resources/js/custom-js-util.js"></script>
+		<script src="/CustomForms/resources/js/custom-js-zoom.js"></script>
+		<script src="/CustomForms/resources/js/custom-js-datatables.js"></script>
+		<script src="scripts/js/formMain.js"></script>
+		<script src="scripts/js/formZoom.js"></script>
+		<script src="js/formDisplay.js"></script>
+		<!-- custom css e javaScript -->
+	</head>
+	<body >
+		<div class="fluig-style-guide">
+			<form name="form" role="form" id="form">
+				<div id="divCabecalho" class="row">
+		            <div class="form-group col-sm-12">
+						<table border="0" width="100%">
+							<tr class="panel-heading">
+								<td class="panel-title-ferbasa" width="100%"><label class="tituloForm">|&nbsp;&nbsp;&nbsp;Gestão de Contratos</label></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td width="100%">&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+		            <input type="hidden" name="hddCampoDescritor" id="hddCampoDescritor" />
+					<input type="hidden" name="chaveFormulario" id="chaveFormulario"/>
+					
+					<input type="hidden" name="hddNumAnexos" id="hddNumAnexos"/>
+					<input type="hidden" name="hddNumProcess" id="hddNumProcess"/>
+					<input type="hidden" name="hddNumSubProcess" id="hddNumSubProcess"/>
+					<input type="hidden" name="hddHistoricoId" id="hddHistoricoId"/>
+					<input type="hidden" name="txtMatSolic" id="txtMatSolic"/>
+				</div>
+				
+				
+	          	<!-- Dados do Solicitante -->
+	          	<fieldset id="fieldDadosSolicitacao">
+		            <legend>
+						<i class="flaticon flaticon-person icon-sm iconesImg" aria-hidden="true"></i>
+	             	 	<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseDadosSolic" href="#divCollapseDadosSolic">
+				        	Dados do Solicitante
+				    	</a>
+		            </legend>
+		            <div id="divCollapseDadosSolic" class="panel-collapse collapse">
+			            <div class="row">
+			              	<div class="form-group col-sm-4">
+			                	<label>E-mail</label>
+			                	<input type="text" name="txtEmailSol" id="txtEmailSol" class="form-control" readonly />
+			              	</div>
+			              	<div class="form-group col-sm-4">
+				                <label>Nome Solicitante</label>
+				                <input type="hidden" name="hddCodSolic" id="hddCodSolic" />
+				                <input type="hidden" name="hddNomeSolic" id="hddNomeSolic" />
+				                <input  name="txtSolicitante" id="txtSolicitante" class="form-control" type="text" readonly />
+			              	</div>
+			              	<div class="form-group col-sm-4">
+			                	<label>Data Solicitação</label>
+			                	<input type="text" name="txtDataSolicitacao" id="txtDataSolicitacao" class="form-control" readonly />
+			              	</div>
+			            </div>
+		            </div>
+	         	</fieldset>
+
+				<!-- Dados Gerais -->
+	         	<fieldset id="fieldDadosGerais" >
+				<legend>
+					<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseDadosGerais" href="#divCollapseDadosGerais">
+			        	<i class="flaticon flaticon-folder-person icon-sm iconesImg" aria-hidden="true"></i>
+			        	Dados Gerais
+			    	</a>
+				</legend>
+					<div id="divCollapseDadosGerais" class="panel-collapse collapse in">
+						<div class="row">
+							<div class="form-group col-md-4" id="divGestorAprovacao">
+							    <label class="required" for="txtGestorAprovacao">Gestor Para Aprovação</label>
+							    <div class="input-group">
+							       	<input type="hidden" name="hddGestorAprovacao" id="hddGestorAprovacao" >
+							        <input type="text" name="txtGestorAprovacao" id="txtGestorAprovacao" class="form-control" readonly>
+							        <div class="input-group-btn">
+							            <button type="button" id="btnZoomGestorAprovacao" class="btn btn-primary btn-custom-zoom" disabled>
+							                <span class="fluigicon fluigicon-user-search icon-sm"></span>
+							            </button>
+							        </div>
+							    </div>
+							</div>
+							<div class="form-group col-md-4" id="divEmailGestorAprovacao">
+							   	<label class="required" for="txtEmailGestorAprovacao">E-mail do Gestor Para Aprovação</label>
+								<input type="hidden" name="hddEmailGestorAprovacao" id="hddEmailGestorAprovacao" >
+						        <input type="text" name="txtEmailGestorAprovacao" id="txtEmailGestorAprovacao" class="form-control" readonly>
+							</div>
+							<div id="divDocumento" class="form-group col-md-4">
+								<input  type="hidden" name="hddslcDocumento" id="hddslcDocumento"/>
+								<label class="required" for="slcDocumento">Tipo do Documento</label>
+								<select name="slcDocumento"id="slcDocumento" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Contrato">Contrato</option>
+									<option value="Análise de Contrato">Análise de Contrato</option>
+									<option value="Ofícios / Respostas a Ofícios">Ofícios / Respostas a Ofícios</option>
+									<option value="Notificações">Notificações</option>
+									<option value="Declarações">Declarações</option>
+									<option value="Termos">Termos</option>
+								</select>
+							</div>
+							<style>
+								.radio-inline-group {
+								  display: flex;
+								  gap: 1rem;
+								  align-items: center;
+								}
+							</style>
+							<div class="form-group col-md-2" style="display: none;"id="divSlcEspecieDocumento">
+								<label class="required" for="slcEspecieDocumento">Espécie do Documento</label>
+								<select name="slcEspecieDocumento"id="slcEspecieDocumento" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Contrato de Prestação de Serviços">Contrato de Prestação de Serviços</option>
+									<option value="Contrato de Compra e Venda">Contrato de Compra e Venda</option>
+									<option value="Contrato de Fornecimento de Materiais">Contrato de Fornecimento de Materiais</option>
+									<option value="Contrato de Locação ou Aluguel">Contrato de Locação ou Aluguel</option>
+									<option value="Contrato de Comodato">Contrato de Comodato</option>
+									<option value="Contrato de Parceria">Contrato de Parceria</option>
+									<option value="Contrato de Empreitada">Contrato de Empreitada</option>
+									<option value="Contrato de Seguro">Contrato de Seguro</option>
+									<option value="Contrato de Arrendamento">Contrato de Arrendamento</option>
+								</select>
+							</div>
+							<div class="col-md-2" style="display: none;" id="divSlcMinutIntExt">
+								<label class="required" for="slcMinutIntExt">Minuta</label> 
+			  
+								<div class="radio-inline-group">
+									<div class="custom-radio custom-radio-success">
+										<input type="radio" name="slcMinutIntExt" value="true" id="slcMinutInt">
+										<label for="slcMinutInt">Interna</label>
+									</div>
+							
+									<div class="custom-radio custom-radio-danger">
+										<input type="radio" name="slcMinutIntExt" value="false" id="slcMinutExt">
+										<label for="slcMinutExt">Externa</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+
+				<!-- Objeto -->
+				<fieldset id="fieldObj" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseObj" href="#divCollapseObj">
+							<i class="flaticon flaticon-multiple-register icon-sm iconesImg" aria-hidden="true"></i>
+							Objeto
+						</a>
+					</legend>
+						<div id="divCollapseObj" class="panel-collapse collapse in">
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label for="txtIdentDoc">identificação do documento</label>
+									<input type="text" name="txtIdentDoc" id="txtIdentDoc" class="form-control" readonly>
+								</div>
+								<div class="form-group col-sm-12" id="divDescServProd">
+									<label class="required" for="txtDescServProd">Descreva detalhadamente o serviço a ser prestado, produto que está sendo adquirido ou o conteúdo do termo / declaração / outro. </label>
+									<textarea style="resize: none;" rows="5" name="txtDescServProd" id="txtDescServProd" class="form-control" readonly ></textarea>
+								</div>
+							</div>
+						</div>
+				</fieldset>
+
+				<!-- Diretoria Ciente -->
+				<fieldset id="fieldDadosDiretoria" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseDire" href="#divCollapseDire">
+							<i class="flaticon flaticon-file-person icon-sm iconesImg" aria-hidden="true"></i>
+							Diretoria ciente
+						</a>
+					</legend>
+					<div class="row panel-collapse collapse in" id="divCollapseDire">
+						<div class="form-group col-sm-4">
+							<label class="required" for="diretoriaCiente">Diretoria</label>
+							<select name="diretoriaCiente"id="diretoriaCiente" class="form-control" >
+								<option value="">Selecione</option>
+								<option value="Sim">Sim</option>
+								<option value="Nao">Não</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+				
+				<!-- Dados da Contratada -->
+				<fieldset id="fieldDadosCont" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseDadosCont" href="#divCollapseDadosCont">
+							<i class="flaticon flaticon-file-person icon-sm iconesImg" aria-hidden="true"></i>
+							Dados da Contratada
+						</a>
+					</legend>
+						<div id="divCollapseDadosCont" class="panel-collapse collapse in">
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label>Razão Social</label>
+									<div class="input-group">
+										<input type="hidden" name="hddFornecedorCon" id="hddFornecedorCon">
+										<input type="text" name="txtRazaoSocial" id="txtRazaoSocial" class="form-control" readonly/>
+										  <div class="input-group-btn">
+											<button type="button" id="btnZoomFornecedorCon" class="btn btn-primary btn-custom-zoom" disabled>
+												<span class="fluigicon fluigicon-user-search icon-sm"></span>
+											</button>
+										</div>
+									  </div>
+								  </div>
+								  <div class="form-group col-sm-3">
+									<label class="required" for="txtCpfCnpj">CPF/CNPJ</label>
+									<input type="text" name="txtCpfCnpj" id="txtCpfCnpj" class="form-control cpfCnpjclass" readonly>
+								</div>
+								<div class="form-group col-md-3">
+									<label class="required">Telefone</label>
+									<input type="text" name="txtTel" id="txtTel" class="form-control" readonly>
+								</div>
+								<div class="form-group col-md-3">
+									<label class="required" for="txtEmailContato">E-mail de Contato</label>
+									<input type="text" name="txtEmailContato" id="txtEmailContato" class="form-control" readonly>
+								</div>
+								<div class="col-sm-3" id="divZoomCentroCusto">
+									<label class="required">Centro de Custos: </label>
+									<div class="input-group">
+									  <input
+										type="hidden"
+										name="hddCentroCustoCod"
+										id="hddCentroCustoCod"
+									  />
+									  <input
+										type="text"
+										name="txtCentroCusto"
+										id="txtCentroCusto"
+										class="form-control" readonly
+									  />
+									  <div class="input-group-btn">
+										<button
+										  type="button"
+										  id="btnZoomCentroCusto"
+										  class="btn btn-primary btn-custom-zoom"
+										  disabled
+										  >
+										  <span
+											class="fluigicon fluigicon-user-search icon-sm"
+										  ></span>
+										</button>
+									  </div>
+									</div>
+								</div>
+								<div class="col-sm-3" id="divZoomContaCont">
+									<label class="required">Conta Contábil: </label>
+									<div class="input-group">
+									  <input
+										type="hidden"
+										name="hddContaContCod"
+										id="hddContaContCod"
+									  />
+									  <input
+										type="text"
+										name="txtContaCont"
+										id="txtContaCont"
+										class="form-control"
+										readonly
+									  />
+									  <div class="input-group-btn">
+										<button
+										  type="button"
+										  id="btnZoomContaCont"
+										  class="btn btn-primary btn-custom-zoom"
+										  disabled
+										>
+										  <span
+											class="fluigicon fluigicon-user-search icon-sm"
+										  ></span>
+										</button>
+									  </div>
+									</div>
+								  </div>
+								<div id="divReco" class="form-group col-sm-3" style="display: none;">
+									<input  type="hidden" name="hddslcReco" id="hddslcReco"/>
+									<label class="required" for="slcReco">Aditivo/Renovação</label>
+									<select name="slcReco"id="slcReco" class="form-control" >
+										<option value="">Selecione</option>
+										<option value="Sim">Sim</option>
+										<option value="Não">Não</option>
+									</select>
+								</div>
+							</div>
+						</div>
+				</fieldset>
+
+				<!-- Endereço -->
+				<fieldset id="fieldEndereco">
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseEndereco" href="#divCollapseEndereco">
+							<i class="flaticon flaticon-pin-map icon-sm iconesImg" aria-hidden="true"></i>
+							Endereço
+						</a>
+					</legend>
+						<div id="divCollapseEndereco" class="panel-collapse collapse in">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label class="required" for="txtCep">CEP</label>
+									<input type="text" name="txtCep" id="txtCep" class="form-control" onblur="pesquisacep(this.value);" readonly>
+								</div>
+								<div class="form-group col-sm-4"> 
+									<label class="required" >País</label>
+									<input type="text" name="txtZoomPais" id="txtZoomPais" class="form-control" readonly/>
+									<input type="hidden" name="cod_pais" id="cod_pais">
+								</div>
+								<div class="form-group col-sm-2"> 
+									<label class="required" >UF</label>
+									<input type="text" name="txtZoomUF" id="txtZoomUF" class="form-control" readonly />
+									<input type="hidden" name="UF_nome" id="UF_nome">
+								</div>
+								<div class="form-group col-sm-2">
+									<label class="required" for="txtNumero">Número</label>
+									<input type="text" name="txtNumero" id="txtNumero" class="form-control" readonly>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4"> 
+									<label class="required" >Município</label>
+									<input type="hidden" name="cidade_cod" id="cidade_cod">
+									<input type="text" name="txtZoomMunicipio" id="txtZoomMunicipio" class="form-control" readonly />
+								</div>
+								<div class="form-group col-sm-4">
+									<label class="required" for="txtBairro">Bairro</label>
+									<input type="text" name="txtBairro" id="txtBairro" class="form-control" readonly>
+								</div>
+								<div class="form-group col-sm-4">
+									<label class="required" for="txtLogradouro">Logradouro</label>
+									<input type="text" name="txtLogradouro" id="txtLogradouro" class="form-control" readonly>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+				<!-- Vigência 2 -->
+				<fieldset id="fieldComparacao" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseComparacao" href="#divCollapseComparacao">
+							<i class="flaticon flaticon-date-range icon-sm iconesImg" aria-hidden="true"></i>
+							Vigência
+						</a>
+					</legend>
+						<div id="divCollapseComparacao" class="panel-collapse collapse in">
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label class="required">Início Vigência Atual:</label>
+									<input type="text" name="txtDataIniC" id="txtDataIniC" class="form-control campo-data" mask="00/00/0000" readonly/>
+								</div>
+								<div class="form-group col-sm-3">
+								<label class="required">Término Vigência Atual:</label>
+								<input type="text" name="txtDataFimC" id="txtDataFimC" class="form-control campo-data" mask="00/00/0000" readonly/>
+								</div>
+								<div class="form-group col-sm-3">
+								<label >Outro
+									<span class="fluig-popover"
+											data-toggle="popover"
+											data-placement="top"
+											data-trigger="hover"
+											data-content="Se houver data de entrega dos serviços/equipamentos, deverá ser informado aqui."
+											data-original-title=""
+											title=""><i class="flaticon flaticon-question icon-sm fluig-popover-icon" aria-hidden="true"></i>
+									</span>
+								</label>
+								<input type="text" name="txtOutroC" id="txtOutroC" class="form-control" readonly/>
+								</div>
+								<div class="col-md-3 col-sm-3">
+                                    <label class="required">Valor Total Atual: </label>
+                                    <input type="text" name="txtValorTTA" id="txtValorTTA" class="form-control valor" ${readOnly} readonly/>
+                                </div>
+							</div>
+							<div class="col-md-12" id="fieldsetTabHISTC">
+								<label class="required" for="HISTC">Histórico:</label>
+								<input
+									type="hidden"
+									id="hddJsonTblTabHISTC1"
+									name="hddJsonTblTabHISTC1"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabHISTC2"
+									name="hddJsonTblTabHISTC2"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabHISTC3"
+									name="hddJsonTblTabHISTC3"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabHISTC4"
+									name="hddJsonTblTabHISTC4"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabHISTC5"
+									name="hddJsonTblTabHISTC5"
+								/>
+								
+								<table
+									id="tblTabHISTC"
+									class="display nowrap"
+									style="width: 150%"
+								></table>
+					
+								<div class="row fs-display-flex fs-justify-content-flex-end">
+									<button
+									type="button"
+									id="btnAddTabHISTC"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="Javascript:IncModTabHISTC( 'incluir' );"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Adicionar</span
+										>
+										<span class="flaticon flaticon-add-plus icon-xs"></span>
+									</div>
+									</button>
+									<button
+									type="button"
+									id="btnUpdTabHISTC"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="Javascript:IncModTabHISTC( 'modifica' );"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Modificar</span
+										>
+										<span
+										class="flaticon flaticon-change-layout icon-xs"
+										></span>
+									</div>
+									</button>
+									<button
+									type="button"
+									id="btnDelTabHISTC"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="removeRow(tableTabHISTC, 'tblTabHISTC', columnsTabHISTC);setTimeout(renderGraficoComparacao, 300);"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Eliminar</span
+										>
+										<span class="flaticon flaticon-trash icon-xs"></span>
+									</div>
+									</button>
+								</div>
+							</div>
+							<fieldset id="divGraficoComparacao" style="margin-top: 30px;">
+								<legend>
+								  <i class="flaticon flaticon-graph icon-sm iconesImg" aria-hidden="true"></i>
+								  Comparativo de Valores - Escalabilidade
+								</legend>
+								<div class="row">
+								  <div class="col-md-12">
+									<canvas id="canvasGraficoComparativo" height="50"></canvas>
+								  </div>
+								</div>
+							</fieldset>
+							  
+						</div>
+				</fieldset>
+
+				<!-- Vigência -->
+				<fieldset id="fieldVigencia" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseVigencia" href="#divCollapseVigencia">
+							<i class="flaticon flaticon-date-range icon-sm iconesImg" aria-hidden="true"></i>
+							Vigência
+						</a>
+					</legend>
+						<div id="divCollapseVigencia" class="panel-collapse collapse in">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label class="required">Data de Ínicio</label>
+									<input type="text" name="txtDataIni" id="txtDataIni" class="form-control campo-data" mask="00/00/0000" readonly/>
+								  </div>
+								  <div class="form-group col-sm-4">
+									<label class="required">Data de Fim</label>
+									<input type="text" name="txtDataFim" id="txtDataFim" class="form-control campo-data" mask="00/00/0000" readonly/>
+								  </div>
+								  <div class="form-group col-sm-4">
+									<label >Outro
+										<span class="fluig-popover"
+											  data-toggle="popover"
+											  data-placement="top"
+											  data-trigger="hover"
+											  data-content="Se houver data de entrega dos serviços/equipamentos, deverá ser informado aqui."
+											  data-original-title=""
+											  title=""><i class="flaticon flaticon-question icon-sm fluig-popover-icon" aria-hidden="true"></i>
+										</span>
+									</label>
+									<input type="text" name="txtOutro" id="txtOutro" class="form-control" readonly/>
+								  </div>
+							</div>
+						</div>
+				</fieldset>
+
+				<!-- Compromisso -->
+				<fieldset id="fieldDadosCompro" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseCompro" href="#divCollapseCompro">
+							<i class="flaticon flaticon-file-person icon-sm iconesImg" aria-hidden="true"></i>
+							Compromisso
+						</a>
+					</legend>
+					<div class="row panel-collapse collapse in" id="divCollapseCompro">
+						<div id="divPrePosFix" class="form-group col-sm-3">
+							<input  type="hidden" name="hddslcPrePosFix" id="hddslcPrePosFix"/>
+							<label class="required" for="slcPrePosFix">Tipo de Compromisso</label>
+							<select name="slcPrePosFix"id="slcPrePosFix" class="form-control" >
+								<option value="">Selecione</option>
+								<option value="Pre">Prefixado</option>
+								<option value="Pos">Pós-fixado</option>
+							</select>
+						</div>
+						
+						<fieldset class="form-group col-md-12" id="fieldJustCompro">
+							
+							<div class="col-md-12" id="fieldsetTabGatilhos">
+								<label class="required" for="Gatilhos">Gatilhos:</label>
+								<input
+									type="hidden"
+									id="hddJsonTblTabGatilhos1"
+									name="hddJsonTblTabGatilhos1"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabGatilhos2"
+									name="hddJsonTblTabGatilhos2"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabGatilhos3"
+									name="hddJsonTblTabGatilhos3"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabGatilhos4"
+									name="hddJsonTblTabGatilhos4"
+								/>
+								<input
+									type="hidden"
+									id="hddJsonTblTabGatilhos5"
+									name="hddJsonTblTabGatilhos5"
+								/>
+								
+								<table
+									id="tblTabGatilhos"
+									class="display nowrap"
+									style="width: 150%"
+								></table>
+					
+								<div class="row fs-display-flex fs-justify-content-flex-end">
+									<button
+									type="button"
+									id="btnAddTabGatilhos"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="Javascript:IncModTabGatilhos( 'incluir' );"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Adicionar</span
+										>
+										<span class="flaticon flaticon-add-plus icon-xs"></span>
+									</div>
+									</button>
+									<button
+									type="button"
+									id="btnUpdTabGatilhos"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="Javascript:IncModTabGatilhos( 'modifica' );"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Modificar</span
+										>
+										<span
+										class="flaticon flaticon-change-layout icon-xs"
+										></span>
+									</div>
+									</button>
+									<button
+									type="button"
+									id="btnDelTabGatilhos"
+									class="btn btn-default btn-sm"
+									style="margin: 1%; display:none;"
+									onclick="removeRow(tableTabGatilhos, 'tblTabGatilhos', columnsTabGatilhos);"
+									>
+									<div class="form-inline">
+										<span style="vertical-align: top; padding-right: 5px"
+										>Eliminar</span
+										>
+										<span class="flaticon flaticon-trash icon-xs"></span>
+									</div>
+									</button>
+								</div>
+							</div>
+						</fieldset>
+						
+					</div>
+				</fieldset>
+
+				<!-- IPCA -->
+				<fieldset id="fieldDadosIPCA" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseIPCA" href="#divCollapseIPCA">
+							<i class="flaticon flaticon-file-person icon-sm iconesImg" aria-hidden="true"></i>
+							IPCA
+						</a>
+					</legend>
+					<div class="row panel-collapse collapse in" id="divCollapseIPCA">
+						<div class="form-group col-sm-4">
+							<input  type="hidden" name="hddslcIPCA" id="hddslcIPCA"/>
+							<label class="required" for="IPCA">Ultrapassa o Indice IPCA?</label>
+							<select name="slcIPCA"id="slcIPCA" class="form-control" >
+								<option value="">Selecione</option>
+								<option value="Sim">Sim</option>
+								<option value="Nao">Não</option>
+							</select>
+						</div>
+						
+						<div class="col-md-12" id="fieldsetTabIPCA">
+							<label class="required" for="IPCA">Orçamentos:</label>
+							<input
+								type="hidden"
+								id="hddJsonTblTabIPCA1"
+								name="hddJsonTblTabIPCA1"
+							/>
+							<input
+								type="hidden"
+								id="hddJsonTblTabIPCA2"
+								name="hddJsonTblTabIPCA2"
+							/>
+							<input
+								type="hidden"
+								id="hddJsonTblTabIPCA3"
+								name="hddJsonTblTabIPCA3"
+							/>
+							<input
+								type="hidden"
+								id="hddJsonTblTabIPCA4"
+								name="hddJsonTblTabIPCA4"
+							/>
+							<input
+								type="hidden"
+								id="hddJsonTblTabIPCA5"
+								name="hddJsonTblTabIPCA5"
+							/>
+							
+							<table
+								id="tblTabIPCA"
+								class="display nowrap"
+								style="width: 150%"
+							></table>
+				
+							<div class="row fs-display-flex fs-justify-content-flex-end">
+								<button
+								type="button"
+								id="btnAddTabIPCA"
+								class="btn btn-default btn-sm"
+								style="margin: 1%; display:none;"
+								onclick="Javascript:IncModTabIPCA( 'incluir' );"
+								>
+								<div class="form-inline">
+									<span style="vertical-align: top; padding-right: 5px"
+									>Adicionar</span
+									>
+									<span class="flaticon flaticon-add-plus icon-xs"></span>
+								</div>
+								</button>
+								<button
+								type="button"
+								id="btnUpdTabIPCA"
+								class="btn btn-default btn-sm"
+								style="margin: 1%; display:none;"
+								onclick="Javascript:IncModTabIPCA( 'modifica' );"
+								>
+								<div class="form-inline">
+									<span style="vertical-align: top; padding-right: 5px"
+									>Modificar</span
+									>
+									<span
+									class="flaticon flaticon-change-layout icon-xs"
+									></span>
+								</div>
+								</button>
+								<button
+								type="button"
+								id="btnDelTabIPCA"
+								class="btn btn-default btn-sm"
+								style="margin: 1%; display:none;"
+								onclick="removeRow(tableTabIPCA, 'tblTabIPCA', columnsTabIPCA);"
+								>
+								<div class="form-inline">
+									<span style="vertical-align: top; padding-right: 5px"
+									>Eliminar</span
+									>
+									<span class="flaticon flaticon-trash icon-xs"></span>
+								</div>
+								</button>
+							</div>
+						</div>
+						<div class="row col-md-12" id="fieldJustIPCA">
+							<div class="form-group col-md-3">
+								<label class="required" for="txtCodOrc">Código Orçamento</label>
+								<input type="text" name="txtCodOrc" id="txtCodOrc" class="form-control" readonly >
+							</div>
+							<div class="form-group col-md-9">
+								<label class="required" for="txtJustIPCA">Justificativa</label>
+								<input type="text" name="txtJustIPCA" id="txtJustIPCA" class="form-control" readonly >
+							</div>
+						</div>
+					</div>
+				</fieldset>
+
+				<!-- Pagamento -->
+				<fieldset id="fieldPagamento" >
+				<legend>
+					<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapsePagamento" href="#divCollapsePagamento">
+			        	<i class="flaticon flaticon-monetization-on icon-sm iconesImg" aria-hidden="true"></i>
+			        	Pagamento
+			    	</a>
+				</legend>
+					<div id="divCollapsePagamento" class="panel-collapse collapse in">
+						<div class="row">
+							<div class="form-group col-sm-3">
+								<label class="required">Valor Total</label>
+								<input type="text" name="txtValorTotal" id="txtValorTotal" class="form-control" readonly/>
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="required" for="slcFormaPag">Forma de Pagamento</label>
+								<select name="slcFormaPag"id="slcFormaPag" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="À Vista">À Vista</option>
+									<option value="Parcelado">Parcelado</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<label class="required" for="slcMeioPag">Meio de Pagamento</label>
+								<select name="slcMeioPag"id="slcMeioPag" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Pix">Pix</option>
+									<option value="Boleto">Boleto Bancário</option>
+									<option value="Deposito">Depósito Bancário</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+			                	<label class="required">Vencimento</label>
+			                	<input type="text" name="txtVencimento" id="txtVencimento" class="form-control campo-data" mask="00/00/0000" readonly/>
+			              	</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4" id="divParcelas" style="display: none;">
+			                	<label class="required">Parcelas</label>
+			                	<input type="text" name="txtParcelas" id="txtParcelas" class="form-control" readonly/>
+			              	</div>
+							<div class="col-sm-4" id="divZoomCondPag">
+								<label class="required">Condição de Pagamento </label>
+								<div class="input-group">
+								  <input
+									type="hidden"
+									name="hddCondPagCod"
+									id="hddCondPagCod"
+								  />
+								  <input
+									type="text"
+									name="txtCondPag"
+									id="txtCondPag"
+									class="form-control"
+								   readonly/>
+								  <div class="input-group-btn">
+									<button
+									  type="button"
+									  id="btnZoomCondPag"
+									  class="btn btn-primary btn-custom-zoom"
+									disabled>
+									  <span
+										class="fluigicon fluigicon-user-search icon-sm"
+									  ></span>
+									</button>
+								  </div>
+								</div>
+							</div>
+							  
+							<div class="form-group col-md-4" id="divslcPix" style="display: none;">
+								<label for="ChavePix_217">Chave Pix</label>
+								<input type="text" class="form-control" name="ChavePix_217" id="ChavePix_217" readonly>
+							</div>
+						</div>
+						<div class="row" style="display: none;">
+							<div class="col-sm-4" id="divslcInst">
+								<label class="required">Instituição Bancária </label>
+								<div class="input-group">
+								  <input
+									type="hidden"
+									name="hddIBancaria_211"
+									id="hddIBancaria_211"
+								  />
+								  <input
+									type="text"
+									name="IBancaria_211"
+									id="IBancaria_211"
+									class="form-control"
+								   readonly/>
+								  <div class="input-group-btn">
+									<button
+									  type="button"
+									  id="btnZoomIBancaria"
+									  class="btn btn-primary btn-custom-zoom"
+									disabled>
+									  <span
+										class="fluigicon fluigicon-user-search icon-sm"
+									  ></span>
+									</button>
+								  </div>
+								</div>
+							</div>
+							<div class="form-group col-md-4" id="divslcAgencia">
+								<label for="Agncia_216">Agência</label>
+								<input type="text" class="form-control" name="Agncia_216" id="Agncia_216" readonly>
+							</div>
+
+							<div class="form-group col-md-4" id="divslcConta">
+								<label for="ContaCorrente_215">Conta Corrente</label>
+								<input type="text" class="form-control" name="ContaCorrente_215" id="ContaCorrente_215" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-12" id="divDetalhes">
+								<label class="required" for="txtDetalhes">Detalhes</label>
+								<textarea style="resize: none;" rows="5" name="txtDetalhes" id="txtDetalhes" class="form-control" readonly></textarea>
+							</div>
+						</div>
+						<h5>Demais Informações</h5>
+						<div class="row">
+							<div class="form-group col-sm-3">
+								<label class="required" for="slcPagIni">O pagamento já iniciou?</label>
+								<select name="slcPagIni"id="slcPagIni" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Sim">Sim</option>
+									<option value="Não">Não</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="required" for="slcSerIni">Os serviços já iniciaram?</label>
+								<select name="slcSerIni"id="slcSerIni" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Sim">Sim</option>
+									<option value="Não">Não</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="required" for="slcForHomol">O fornecedor já foi homologado?</label>
+								<select name="slcForHomol"id="slcForHomol" class="form-control" >
+									<option value="">Selecione</option>
+									<option value="Sim, Apto">Sim, Apto</option>
+									<option value="Sim, Inapto">Sim, Inapto</option>
+									<option value="Não">Não</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+							    <label class="required" for="slcCapOpe">Capex ou Opex?
+							    </label>
+							        <span class="fluig-popover"
+							              data-toggle="popover"
+							              data-placement="top"
+							              data-trigger="hover"
+							              data-content="
+							              	O CAPEX (Capital Expenditure), são investimentos em bens de capital ou ativos que possuem como objetivo expandir a capacidade de produção, buscar uma melhoria ou geração de lucro. É definido pelas seguintes regras:
+											Possuir valor superior a R$ 1.200; Possuir vida útil acima de 12 meses; Ser tangível e rastreável, com exceção para softwares, marcas e patentes; Haver possibilidade de manutenção preventiva para preservar a vida útil e valor contábil.
+											Opex (Operational Expenditure), “Despesas Operacionais”, refere-se ao capital aplicado para aprimorar ou assegurar a manutenção dos bens físicos da empresa.
+											"
+							              data-original-title=""
+							              title=""><i class="flaticon flaticon-question icon-sm fluig-popover-icon" aria-hidden="true"></i>
+							        </span>
+							    <select name="slcCapOpe" id="slcCapOpe" class="form-control">
+							        <option value="">Selecione</option>
+							        <option value="Capex">Capex</option>
+							        <option value="Opex">Opex</option>
+							    </select>
+							</div>
+							<div class="form-group col-sm-12" id="divNumeroTAP" style="display:none;">
+			                	<label class="required">Número TAP</label>
+			                	<input type="text" name="txtNumeroTAP" id="txtNumeroTAP" class="form-control" readonly/>
+			              	</div>
+						</div>
+					</div>
+				</fieldset>
+
+				<div class="panel-title-ferbasa" width="100%"><label>|&nbsp;&nbsp;&nbsp;Anexos:</label></div>
+				<div class="panel-title-ferbasa" id="divTxtOut" width="100%"><label>|&nbsp;&nbsp;&nbsp;Proposta Comercial + Outro documento.</label></div>
+				<div class="panel-title-ferbasa" id="divTxtNov" width="100%"><label class="required">|&nbsp;&nbsp;&nbsp;Estatuto Social e Ata de Eleição dos Diretores, Contrato Social (Ultima alteração) e/ou Procuração.</label></div>	
+				
+				<!-- Aprovações -->
+				<fieldset id="fieldAprovacoes" >
+					<legend>
+						<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseAprovacoes" href="#divCollapseAprovacoes">
+							<i class="flaticon flaticon-document-approved icon-sm iconesImg" aria-hidden="true"></i>
+							Aprovações
+						</a>
+					</legend>
+						<div id="divCollapseAprovacoes" class="panel-collapse collapse in">
+							<fieldset id="fieldAproGesReq">
+								<legend>Gestor Requisitante</legend>
+									<div class="row">
+										<div class="form-group col-md-2">
+											<label class="required" for="slcAproGesReq1">De acordo Inicial</label>
+											<select name="slcAproGesReq1" id="slcAproGesReq1" class="form-control">
+												<option value="">Selecione</option>
+												<option value="Sim">Sim</option>
+												<option value="Não">Não</option>
+											</select>
+										</div>
+										<div class="form-group col-md-2">
+											<label class="required" for="slcAproGesReq2">De acordo Final</label>
+											<select name="slcAproGesReq2" id="slcAproGesReq2" class="form-control">
+												<option value="">Selecione</option>
+												<option value="Sim">Sim</option>
+												<option value="Não">Não</option>
+											</select>
+										</div>
+										<div class="form-group col-md-2">
+											<label class="required" for="slcAproOrc">Orçamento</label>
+												<span class="fluig-popover"
+													data-toggle="popover"
+													data-placement="top"
+													data-trigger="hover"
+													data-content="- Em casos de Compensação Financeira ou Não Orçado, é obrigatório informar a Justificativa Orçamentária.\n\n- Para Compensação Financeira, também é obrigatório informar no mínimo dois Centros de Custo e duas Contas Contábeis: indicando de onde sai e para onde entra o recurso."
+													data-original-title=""
+													title=""><i class="flaticon flaticon-question icon-sm fluig-popover-icon" aria-hidden="true"></i>
+												</span>
+											<select name="slcAproOrc" id="slcAproOrc" class="form-control">
+												<option value="">Selecione</option>
+												<option value="Orcado">Orçado</option>
+												<option value="Compensacao">Compensação Financeira</option>
+												<option value="Recusado">Não Orçado</option>
+											</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for = "txtResponsavelGesReq">Responsável</label>
+											<input type="text" name= "txtResponsavelGesReq" id="txtResponsavelGesReq" class="form-control" readonly>
+										</div>
+										<div class="form-group col-md-3">
+											<label for = "txtDataGesReq">Data </label>
+											<input type="text" name= "txtDataGesReq" id="txtDataGesReq" class="form-control" readonly>
+										</div>
+									</div>
+							</fieldset>
+	
+							<fieldset id="fieldAproPlanFin">
+								<legend>Planejamento Financeiro</legend>
+									<div class="row">
+										<div class="form-group col-md-4">
+											<label class="required" for="slcAproPlanFin">De acordo?</label>
+											<select name="slcAproPlanFin" id="slcAproPlanFin" class="form-control">
+												<option value="">Selecione</option>
+												<option value="Sim">Sim</option>
+												<option value="Não">Não</option>
+											</select>
+										</div>
+										<div class="form-group col-md-4">
+											<label for = "txtResponsavelPlanFin">Responsável</label>
+											<input type="text" name= "txtResponsavelPlanFin" id="txtResponsavelPlanFin" class="form-control" readOnly>
+										</div>
+										<div class="form-group col-md-4">
+											<label for = "txtDataPlanFin">Data </label>
+											<input type="text" name= "txtDataPlanFin" id="txtDataPlanFin" class="form-control" readonly>
+										</div>
+									</div>
+							</fieldset>
+	
+							<fieldset id="fieldAproFor">
+							<legend>Validação de minuta Interna/Externa</legend>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label class="required" for="slcAproFor">De acordo?</label>
+										<select name="slcAproFor" id="slcAproFor" class="form-control">
+											<option value="">Selecione</option>
+											<option value="Sim">Sim</option>
+											<option value="Não">Não</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtResponsavelFor">Responsável</label>
+										<input type="text" name= "txtResponsavelFor" id="txtResponsavelFor" class="form-control" readonly>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtDataFor">Data </label>
+										<input type="text" name= "txtDataFor" id="txtDataFor" class="form-control" readonly>
+									</div>
+								</div>
+							</fieldset>
+
+							<fieldset id="fieldAproGesSup">
+							<legend>Gestor Suprimentos</legend>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label class="required" for="slcAproGesSup">De acordo?</label>
+										<select name="slcAproGesSup" id="slcAproGesSup" class="form-control">
+											<option value="">Selecione</option>
+											<option value="Sim">Sim</option>
+											<option value="Não">Não</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtResponsavelGesSup">Responsável</label>
+										<input type="text" name= "txtResponsavelGesSup" id="txtResponsavelGesSup" class="form-control" readonly>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtDataGesSup">Data </label>
+										<input type="text" name= "txtDataGesSup" id="txtDataGesSup" class="form-control" readonly>
+									</div>
+								</div>
+							</fieldset>
+							
+							<fieldset id="fieldAproGerSup">
+							<legend>Gerente Suprimentos</legend>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label class="required" for="slcAproGerSup">De acordo?</label>
+										<select name="slcAproGerSup" id="slcAproGerSup" class="form-control">
+											<option value="">Selecione</option>
+											<option value="Sim">Sim</option>
+											<option value="Não">Não</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtResponsavelGerSup">Responsável</label>
+										<input type="text" name= "txtResponsavelGerSup" id="txtResponsavelGerSup" class="form-control" readonly>
+									</div>
+									<div class="form-group col-md-4">
+										<label for = "txtDataGerSup">Data </label>
+										<input type="text" name= "txtDataGerSup" id="txtDataGerSup" class="form-control" readonly>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</fieldset>
+
+				<!-- Histórico -->
+				<fieldset id="fieldHistorico" >
+				<legend>
+					<a class="collapse-icon down" data-toggle="collapse" data-parent="#divCollapseHistorico" href="#divCollapseHistorico">
+			        	<i class="flaticon flaticon-archive icon-sm iconesImg" aria-hidden="true"></i>
+			        	Questionamentos
+			    	</a>
+				</legend>
+					<div id="divCollapseHistorico" class="panel-collapse collapse in">
+						<input type="hidden" id="hddJsonTblHistorico1" name="hddJsonTblHistorico1">
+						<input type="hidden" id="hddJsonTblHistorico2" name="hddJsonTblHistorico2">
+						<input type="hidden" id="hddJsonTblHistorico3" name="hddJsonTblHistorico3">
+						<input type="hidden" id="hddJsonTblHistorico4" name="hddJsonTblHistorico4">
+						<input type="hidden" id="hddJsonTblHistorico5" name="hddJsonTblHistorico5">
+						<input type="hidden" id="hddJsonTblHistorico6" name="hddJsonTblHistorico6">
+						<input type="hidden" id="hddJsonTblHistorico7" name="hddJsonTblHistorico7">
+						<input type="hidden" id="hddJsonTblHistorico8" name="hddJsonTblHistorico8">
+						<input type="hidden" id="hddJsonTblHistorico9" name="hddJsonTblHistorico9">
+						<input type="hidden" id="hddJsonTblHistorico10" name="hddJsonTblHistorico10">
+						<table id="tblHistorico" class="display nowrap" style="width:150%">
+						</table>
+						
+						<div class="row">		
+							<div style="float: right; margin: 1%">
+								<input type="text" name="txtPesqHistorico" id="txtPesqHistorico" class="form-control input-sm" placeholder="Pesquisa" />
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-4" id="divProsseguirPara">
+				    		<label class="required" for="slcProsseguirPara">Prosseguir Para?</label>
+							<select name="slcProsseguirPara" id="slcProsseguirPara" class="form-control">
+								<option value="">Selecione</option>
+			    				<option value="Retornar">Análise Interna</option>
+			    				<option value="Finalizar">Criar / Alterar / Concluir Minuta</option>
+								<option value="Aprovacao">Aprovação</option>
+							</select>
+					    </div>
+
+						<div class="form-group col-md-4">
+					    	<label for = "txtResponsavelJuridico">Responsável</label>
+					    	<input type="text" name= "txtResponsavelJuridico" id="txtResponsavelJuridico" class="form-control" readonly>
+						</div>
+						<div class="form-group col-md-4">
+					    	<label for = "txtDataResp">Data </label>
+					    	<input type="text" name= "txtDataResp" id="txtDataResp" class="form-control" readonly>
+						</div>
+					    <div class="form-group col-md-12">
+					        <label for="txtQuestionamento">Questionamento</label>
+					        <textarea style="resize: none;" rows="4" name="txtQuestionamento" id="txtQuestionamento" class="form-control" readonly ></textarea>
+					    </div>
+					    <div class="form-group col-md-12" id="divResposta">
+					        <label for="txtResposta">Resposta</label>
+					        <textarea style="resize: none;" rows="4" name="txtResposta" id="txtResposta" class="form-control" readonly></textarea>
+					    </div>
+					</div>
+				</fieldset>
+				
+				
+				   <!-- Img -->
+			          <div class="img mt-5">
+			            <img
+			              src="img/milicones-topo.png"
+			              alt="img-millpar"
+			              id="listaMillpar"
+			            />
+			            <img
+			              src="img/logo_branca.jpg"
+			              alt="logo"
+			              id="logoMillparDark"
+			              class="logoMillpar"
+			            />
+			            <img
+			              src="img/logo_nova.png"
+			              alt="logo2"
+			              id="logoMillparLight"
+			              class="logoMillpar"
+			            />
+			          </div>
+         	</form>
+       	</div>
+    </body>
+</html>	

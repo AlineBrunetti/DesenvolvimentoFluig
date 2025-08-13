@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+a {
+    text-decoration: none !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.fluig-popover-icon{
+	color: red;
+	margin-left: auto;
+}
+
+.popover-content {
+    max-height: 200px; /* Ajuste a altura conforme necessário */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical caso o conteúdo seja muito longo */
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --cor-dark-fundo: #4a4b48;
+  --cor-titulo: #fff;
+  --cor-secundaria: #b6b6b6;
+  --cor-light-fundo: #fff;
+  --cor-verde-destaque: #92c01f;
+}
+/* Estilos do Cabeçaho */
+h2 #titulo-Principal {
+  color: var(--cor-dark-fundo) !important;
+  font-family: "Montserrat", sans-serif;
+}
+/* Estilos dos ícones dark */
+.bi {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.bi-moon {
+  display: none;
+}
+#modeLight {
+  display: block;
+}
+.dark #modeLight {
+  display: none;
+}
+#modeDark {
+  display: none;
+}
+.dark #modeDark {
+  display: block;
+}
+input[type="checkbox"] {
+  display: none !important;
+}
+/* Estilo dos Icones */
+.iconesImg {
+  vertical-align: sub !important;
+  width: 18px;
+  height: 18px;
+  color:var(--cor-verde-destaque);
+}
+/* Alinhamento da tela  */
+.alinhar {
+  padding: 10px;
+}
+/* Estilo dos obrigatórios */
+.required:after {
+  content: " *";
+  color: red;
+}
+/* Estilo Dark  */
+.dark legend {
+  color: var(--cor-light-fundo) !important;
+  font-weight: 100 !important;
+}
+.dark #titulo-Principal {
+  color: var(--cor-light-fundo) !important;
+}
+.dark,
+.dark body {
+  background-color: var(--cor-dark-fundo);
+  color: var(--cor-titulo);
+}
+.dark .bi-sun {
+  display: none;
+}
+.dark .bi-moon {
+  display: block;
+  color: var(--cor-light-fundo);
+}
+.dark p {
+  color: var(--cor-titulo) !important;
+}
+.dark input {
+  background-color: var(--cor-secundaria) !important;
+  border: var(--cor-light-fundo);
+}
+.dark label {
+  color: var(--cor-titulo) !important;
+  font-weight: 100 !important;
+}
+.dark textarea {
+  background-color: var(--cor-secundaria) !important;
+}
+.dark select {
+  background-color: var(--cor-secundaria) !important;
+}
+.dark th {
+  color: var(--cor-titulo) !important;
+}
+.dark a {
+  color: var(--cor-titulo) !important;
+}
+.fluig-style-guide .form-control[readonly] {
+  color: black !important;
+}
+
+/* Formata��o Imagem */
+#image-footer {
+  max-width: 340px;
+}
+
+#logo-footer {
+  max-width: 160px;
+}
+.img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoMillpar {
+  width: 10% !important;
+  transition: 0.8s;
+}
+
+#listaMillpar {
+    height: 10%!important;
+    width: 40%!important;
+    transition: 0.8s;
+}
+/* Estilo :placeholder */
+.fluig-style-guide .form-control[readonly] {
+  color: black !important;
+}
+
+/* Estilo btn */
+
+#botaoAnexo {
+  background-color: var(--cor-verde-destaque) !important;
+  border-color: var(--cor-verde-destaque) !important;
+  font-weight: 100 !important;
+}
+
+/* Padrões dos modais com zoom */
+
+.fluig-style-guide .form-control[readonly] {
+  color: var(--cor-dark-fundo) !important;
+  border-width: 1px;
+  border-color: #d1d3d4;
+}
+
+/* 
+Padrão para não quebrar os espaços */
+.fluig-style-guide label {
+  font-weight: normal !important;
+  font-size: 13px !important;
+  text-wrap: nowrap !important;
+}
+
+/* Estilizando modais */
+.panel.panel-default .panel-heading.panel-heading-collapse-icon {
+  background-color: white !important;
+  border-color: white !important;
+}
+.fluig-style-guide .panel.panel-default {
+  border-color: white !important;
+}
+.fluig-style-guide .panel.panel-default .panel-heading {
+  border-color: white !important;
+  background-color: white !important;
+}
+.fluig-style-guide .modal-content .modal-header {
+  background-color: white !important;
+}
+.required:after {
+  content: " *";
+  color: red;
+}
+.fluig-style-guide .panel-heading .collapse-icon {
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------------ */
