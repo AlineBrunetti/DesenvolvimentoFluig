@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- core css e javaScript -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/style-guide/css/fluig-style-guide.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/jquery/jquery.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/jquery/jquery-ui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/portal/resources/js/mustache/mustache-min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/style-guide/js/fluig-style-guide.min.js"
+      charset="utf-8"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="estilo.css" />
+
+    <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+    <!-- core css e javaScript -->
+
+    <!-- custom css e javaScript -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/font-awesome.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/datatables.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/datatables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.priceFormat.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.maskMoney.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/jquery.mask.js"
+    ></script>
+
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/CustomForms/resources/css/custom-style-guide.css"
+    />
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-util.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-zoom.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/CustomForms/resources/js/custom-js-datatables.js"
+    ></script>
+    <title>Solicitação de Normalizção</title>
+    <!-- custom css e javaScript -->
+  </head>
+  <body>
+    <main class="alinhar">
+      <div class="fluig-style-guide">
+        <form name="form" role="form">
+          <!-- Campos ocultos -->
+          <input type="hidden" name="gestorMatric" id="gestorMatric" />
+          <input type="hidden" name="hddNumProcess" id="hddNumProcess" />
+          <input type="hidden" name="hddMailSol" id="hddMailSol" />
+          <input type="hidden" name="hddMailGest" id="hddMailGest" />
+          <!-- Titulo Principal do Formulário -->
+          <div
+            id="divCabecalho"
+            class="col-12 fs-display-flex fs-justify-content-space-between fs-sm-margin-bottom fs-md-padding fs-align-items-center fs-width-max-content"
+          >
+            <div class="row">
+              <h2 id="titulo-Principal">
+                |&nbsp;&nbsp;&nbsp; Solicitação Normalização
+              </h2>
+            </div>
+
+            <!--<div
+              id="icone-dark-mode"
+              class="fs-display-flex fs-justify-content-end fs-text-center"
+            >
+              <input type="checkbox" name="changetheme" id="change-theme" />
+              <label for="change-theme" id="icone">
+                <label id="modeDark"> Modo Escuro</label>
+                <label id="modeLight"> Modo Claro</label>
+                <i class="bi bi-sun"></i>
+                <i class="bi bi-moon"></i>
+              </label>
+            </div>-->
+          </div>
+<!--------Info Solicitante--------------------------------------------------------------------------------------------------------->
+          <fieldset id="divInfoSol" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA/ZJREFUSEu1lV1oW2UYx3/PSW0rdjKGTudsTlu90FVYrXPqWsiJKwoWhoIK6s3GQNE1SSfMi45t7fxEBm2aFYRNZQhDqghuflw423TdyobT+rUVYdqcbC0WpeLH6FpPzmNP0mxp2rTe9LlK3vM/7//jfZ/nCEtcssT7syBBq2Ks6PM3IrIeuBtlXVqQcAYYJMWp8aD9eavgFhJakGD/l5Wm63MPAxsWcTlgpIynmzYO2/Ph5iWI9ZlbVYkC14lwWlUO4XJuSqbOepuUUHwXomsU2Qx6L3BJhEgoYL+dTzKHIBav2KLoO8DUdBht4wH7jUIRpCOMmy0Iu4FrVGRzJJA4lEsyi6Cjv8pvpFI/AmUq1EcC9oAH7uxdfSuG7yAqD2SOgBOqznPh4MhF73+sx1+nhvQD/6DOmuz6DDbDp4rE+kxvw/sVXo5YtqeK2InyW9QxvgNuyLP/mxS5NaH6C6NpEXHz1WnXLUBP2LI3ZrFXHHQer1yP654G+WFcE7WtQZyZF7uBJ4CDUuTuMVLFPsd19oiwFfggbNlPerjWXopWiOndrrUIteGAPTjLQWdvRTOi7aDPhq3kgayCzrj5B7Acdcqz1tv7/VW+lPwMjIUt++YsNhY3X1DoUqEpErC7ZhPEzbRScbU+9GDyZA7BGLBShKpQwB721gsRRONmUKBH4XDEsp/JI/AnQconJy+X7Xh47FIOQTaiA6iz12eUiqNOm8AWgfdDlv1UFttxrPImo8j9FUiELbsy38FfwDKfyqptwYQHSlf7cXOVz+Ub4EoUM49GXceobW4Y9hyma+ZCjAB/hi17eT7BEHCHCo2RgP1Z7o3pPHX79TLx70sqeLYV5L3JyYk3c52mCfrKN6kaHwPfhy17bX5E75LuTHaGLfu1LIF3faNxf52B1CiSvqqC/i6qg03B5ICIR5ipznhFG+huFX0rEkg+P4sg2mc+IsqnwLBTnKp+ccPFif09/mo15IhCVa6jnN/nU8Km7QF7qKv3xrKUXHvOO0cDfajJSn4xi6C7G9/YSvOMQo1C+9Tk5V0lJaXnvewFRlA95mIkvJcM3ApEGhRWA6PLVG77G92HsA3kq1AgcV/W2axRcbXZ0ho/BB5H+DocsDNjOqdmOt9rJi/rDBbclMo924OJb7PQOcMu2mfuFOWVq3vpprCVPDpfRNG4+ZjARznntSMStPflYucd19G4uVdg10yGQyp4Y7inZMr3S6rUMRxXKlAavF5QuNPDKdISsRKv5wsp+MGJ9ZavU8PoQKkrcMCZZeGkuG5zKHjBm0NzatFvcqy34lEVbfR6ZHq4VXs5C3pWkZ8M1SNNweQnCwlYlGBB9f/j4ZIT/Acpf5wo0Wh08wAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseInfoSol"
+                href="#divCollapseInfoSol"
+              >
+                <span class="fs-text-md"> Informações Solicitante</span></a
+              >
+            </legend>
+
+            <div id="divCollapseInfoSol" class="panel-collapse collapse in">
+              <div id="fieldColab">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label>Nome Solicitante:</label>
+                    <input type="hidden" name="hddCodSolic" id="hddCodSolic" />
+                    <input name="txtSolicitante" id="txtSolicitante" class="form-control" type="text" readonly/>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Matrícula:</label>
+                    <input type="text" name="txtMatSolic" id="txtMatSolic" class="form-control" readonly />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Data Solicitação:</label>
+                    <input type="text" name="txtDataSolicitacao" id="txtDataSolicitacao" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+<!--------Painel de Informações do Documento------------------------------------------------------------------------------------->          
+          <fieldset id="divInfoGerais" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQZJREFUSEvtlrsSATEUhv8Ez6Bg7K6GJ1AobAq9N1lab0Dn8i4q49bqVCjYndF4h+zGrGGYvSRrzY5GyuTkfDnn/DkJQcaDZOwfIcB4oXcIFQMAdQl873HKeu3zVXXAEGC60i4CKKk2Ajh4nJoqSAgwWWnCd24xJzJ9z3XfhgAnl9OmDPINwAagAzh6nLbiIKkB3HXLhVxuI4CqLJLUAD+Fo7lRpHlvDaAWB1ECgjV5r0FYCGRrMbvxPp8GsATA4lQWFIcSkECud5M49f0eIM/5676kjiBzwL8GShX9axCVIgdAJal6Ana2xRxD2oseT+bQ75AfQnaCoN81nZkU8KFTpXnmv4obt8PTGblhjKUAAAAASUVORK5CYII="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseInfoDoc"
+                href="#divCollapseInfoDoc"
+              >
+                <span class="fs-text-md"> Informações Documento</span></a
+              >
+            </legend>
+            <div id="divCollapseInfoDoc" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-sm-4">
+                  <label class="required">Tipo de Documento </label>
+  
+                  <span class="fs-display-inline-block fs-cursor-pointer" id="openModalButton">
+                    <img
+                      id="imgBtn"
+                      class="fs-full-width"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAASBJREFUSEvlk6FKREEYhb9jEMQirEGfwCxGsWxwfQCxWGwimMRmcXHbBpOyxQcQg1nBZhN9A4tBEdQoiOF4BybI5e6d9boXVvzThJnzzZxzRtQ8qlmffwKwvQpsAc1o6RVwJOk8ZXHSIttdYLeP0L6kdhmkFGB7DTiNAgfAcVxvA3tx3ZJ02Q+SAtwB88COpMPvIrYDoANcSFqpCvgAxoFpSa85wCzwCLxJalQClHlrO4i+ZOE/S5oZKsD2GHACbABnkkJWhZNsUf6U7akY/HIW9CewKOlmKICsspPALTAHPADrkq4r17Tg9j1gE7gHliQ9/fqj5ZrzDkwAC5JChZPzowxsOyhmv3fgcwNvDMK1A5J+FGwYrRf8fYtqz2AkAV9CbFcZozOiJwAAAABJRU5ErkJggg=="
+                    />
+                  </span>
+                  <select name="slcTipoDocumento" class="form-control" id="slcTipoDocumento">
+                    <option value="">Selecione</option>
+                    <option value="Obsoletar Documento">Obsoletar Documento</option>
+                    <option value="Formulário">Formulário</option>
+                    <option value="Padrão de Posto de Trabalho">Padrão de Posto de Trabalho</option>
+                    <option value="Instrução de Trabalho">Instrução de Trabalho</option>
+                    <option value="Instrução Operacional">Instrução Operacional</option>
+                    <option value="Tabela">Tabela</option>
+                    <option value="Procedimento">Procedimento</option>
+                    <option value="Norma Técnica">Norma Técnica</option>
+                    <option value="Manual">Manual</option>
+                    <option value="Política">Política</option>
+                  </select>
+                  <span id="tipoDocumentoErro"></span>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="required">Grau de Prioridade</label>
+                  <select  name="slcGrauPrioridade"  class="form-control"  id="slcGrauPrioridade">
+                    <option value="">Selecione</option>
+                    <option value="3">Baixa</option>
+                    <option value="2">Média</option>
+                    <option value="alta">Alta</option>
+                  </select>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label for="gestor" class="form-label required">Gestor</label>
+                  <input type="zoom" class="form-control" id="gestor" name="gestor"
+                  data-zoom="{
+                      'displayKey':'nome',
+                      'datasetId':'ds_gestores_normalizacao',
+                      'maximumSelectionLength':'1',
+                      'placeholder':'Selecione o Gestor',
+                      'fields':[
+                      {
+                          'field':'nome',
+                          'label':'Nome',
+                          'standard':'true'
+                      },
+                      {
+                        'field':'matricula',
+                        'label':'Matricula',
+                        'visible':'false'
+                    }
+                      ]
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div id="divObsGerais" class="form-group col-md-12">
+                  <label class="mb-3" for="justObs">Observações Gerais</label>
+                  <textarea class="form-control" id="observacao" rows="3" name="observacao" readonly></textarea>
+                  <span id="justObs"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div id="divJustUrg" class="form-group col-md-12">
+                  <label class="mb-3 required" for="justUrgencia">Justifique a Urgência</label>
+                  <textarea class="form-control" id="urgencia" rows="3" name="urgencia" readonly></textarea>
+                  <span id="justErro"></span>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 0; padding: 0;">
+                <span id="titulo-Aviso" style="margin: 0; max-width: 90%; word-break: break-word;">
+                  |&nbsp;&nbsp;&nbsp;<strong>Orientação Upload:</strong> Você deve anexar <span id="word">um arquivo Word</span>  ou <span id="pdf">um arquivo Excel</span>.
+                </span>
+                <button id="botaoAnexo" name="botaoAnexo" class="btn btn-primary" style="margin: 0;">
+                  Anexar Arquivo
+                </button>
+              </div>
+              
+            </div>
+          </fieldset>
+<!--------Aprovação Gestor--------------------------------------------------------------------------------------------------------->
+          <fieldset id="divAprovacaoGrc" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAltJREFUSEu1lUtrE1EUx/9nJnbjwrd9kGaSVkU3IrhoF04ywe+gIIobH2DJSLoX/ABK26RZVCiIKNTvYJlJYsHiRlxKi5k8FGulblwYcufIxKQkk+lMUu3Zzb13zu/cc/7nXMIBGx2wf/QFmMsrF2TGIwLiTkDMMGWIxzPJ6kZQgIGAnBE+I0heB3Dc5WxLME2lk6WSH8QTkDOiI4KwBLAK4FhAlDsgLoCG7urxje/usz2A+TexYSlkfwAwEnR91345JPOlB2p5p3O9B7BgKq8IuDGg8+ZxAj1LaaX7voCMqXwDcHo/AABlXbOUPQGLqzHFlm3fogWAbZlC0ZnEZqV9bjdF88WJiCTEOwCjfUb/BcAKgFlXxDXmxrSerFX/pq1lGTP6GuBrfTqvCibVkWjWjC4x+F73f/RC10q3XQDlJ4AjPQDGUxBuddSlLJgSjvOFfPgssVzwUNyWrlnDbsAPdzMRkE1plp5ZHZ+ELBUB/AY3VOf6HWteKd3WNetUN8CIrIDoujufIKiphPV5sThxrl6v/5q9Wq21In+7t9o8UpTLT44LbrwH0Lxah1ngxpV20QIidyZVRUg0lY5bX7tu4Hz4yHRTSFCHhDgsSF7z6RNbSAi3nfcAnIWMqdQAjHmo6ROAo35NSEAtpVlh307OGpHnTNSU2KDGjOWHSeuOL+CJMXZyiA59HKDhWv64Ili6mE6WHLnvmue4nisoo7KNZQDTfYzrbRCv9T2u3WnJ5pUYMxx1nXDt7f/B6YEY0fMs8UswLjeVQViXbHHzvzyZgxbafT7wTf5XwB9wrOEZ+wy2wAAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseAprvGest"
+                href="#divCollapseAprvGest"
+              >
+                <span class="fs-text-md"> Aprovação - Gestor do Solicitante</span></a
+              >
+            </legend>
+            <div id="divCollapseAprvGest" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <p id="titulo-Aviso1">
+                    |&nbsp;&nbsp;&nbsp;<strong>Orientação Gestor:</strong> Verifique na aba "Anexos", o arquivo. E posteriormente, retorne para a devida validação.
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-4"> 
+                  <div class="row form-group" style="margin-bottom: 0px; margin-left: 0px;">
+                    <label class="required">De acordo?</label>
+                  </div>
+                  <div class="row form-group" style="margin-bottom: 0px; margin-left: 0px;">
+                    <div style="display: inline-block; margin-right: 10px;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="aprGestor" value="true" id="aprGestor_s">
+                        <label for="aprGestor_s">Sim</label>
+                      </div>
+                    </div>
+                    <div style="display: inline-block;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="aprGestor" value="false" id="aprGestor_n">
+                        <label for="aprGestor_n">Não</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtResponsavelGes">Responsável</label>
+                  <input
+                    type="text"
+                    name="txtResponsavelGes"
+                    id="txtResponsavelGes"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtDataAproGes">Data Aprovação</label>
+                  <input
+                    type="text"
+                    name="txtDataAproGes"
+                    id="txtDataAproGes"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12" id="justTxt">
+                  <label for="txtJusGrc">Justificativa</label>
+                  <textarea style="resize: none" rows="5" name="txtJusGrc" id="txtJusGrc" class="form-control" readonly></textarea>
+                </div>
+              </div>
+            </div> 
+          </fieldset>
+<!--------Aprovação Normalização--------------------------------------------------------------------------------------------------->
+          <fieldset id="divAprovacaoNorm" class="fs-sm-padding">
+            <legend>
+              <img
+                class="iconesImg"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAltJREFUSEu1lUtrE1EUx/9nJnbjwrd9kGaSVkU3IrhoF04ywe+gIIobH2DJSLoX/ABK26RZVCiIKNTvYJlJYsHiRlxKi5k8FGulblwYcufIxKQkk+lMUu3Zzb13zu/cc/7nXMIBGx2wf/QFmMsrF2TGIwLiTkDMMGWIxzPJ6kZQgIGAnBE+I0heB3Dc5WxLME2lk6WSH8QTkDOiI4KwBLAK4FhAlDsgLoCG7urxje/usz2A+TexYSlkfwAwEnR91345JPOlB2p5p3O9B7BgKq8IuDGg8+ZxAj1LaaX7voCMqXwDcHo/AABlXbOUPQGLqzHFlm3fogWAbZlC0ZnEZqV9bjdF88WJiCTEOwCjfUb/BcAKgFlXxDXmxrSerFX/pq1lGTP6GuBrfTqvCibVkWjWjC4x+F73f/RC10q3XQDlJ4AjPQDGUxBuddSlLJgSjvOFfPgssVzwUNyWrlnDbsAPdzMRkE1plp5ZHZ+ELBUB/AY3VOf6HWteKd3WNetUN8CIrIDoujufIKiphPV5sThxrl6v/5q9Wq21In+7t9o8UpTLT44LbrwH0Lxah1ngxpV20QIidyZVRUg0lY5bX7tu4Hz4yHRTSFCHhDgsSF7z6RNbSAi3nfcAnIWMqdQAjHmo6ROAo35NSEAtpVlh307OGpHnTNSU2KDGjOWHSeuOL+CJMXZyiA59HKDhWv64Ili6mE6WHLnvmue4nisoo7KNZQDTfYzrbRCv9T2u3WnJ5pUYMxx1nXDt7f/B6YEY0fMs8UswLjeVQViXbHHzvzyZgxbafT7wTf5XwB9wrOEZ+wy2wAAAAABJRU5ErkJggg=="
+              />
+
+              <a
+                class="collapse-icon down fs-no-text-underline"
+                data-toggle="collapse"
+                data-parent="#divCollapseAprvNorm"
+                href="#divCollapseAprvNorm"
+              >
+                <span class="fs-text-md"> Aprovação - Normalização</span></a
+              >
+            </legend>
+            <div id="divCollapseAprvNorm" class="panel-collapse collapse in">
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <p id="titulo-Aviso2">
+                    |&nbsp;&nbsp;&nbsp;<strong>Orientação Normalização:</strong>
+                    Verifique na aba "Anexos", o arquivo. E posteriormente,
+                    <span id="destacarCaminho">descreva o caminho do documento no campo descrição</span>.
+                  </p>
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-4"> 
+                  <div class="row form-group" style="margin-bottom: 0px; margin-left: 0px;">
+                    <label class="required">De acordo?</label>
+                  </div>
+                  <div class="row form-group" style="margin-bottom: 0px; margin-left: 0px;">
+                    <div style="display: inline-block; margin-right: 10px;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="setorApr" value="true" id="setorApr_s">
+                        <label for="setorApr_s">Sim</label>
+                      </div>
+                    </div>
+                    <div style="display: inline-block;">
+                      <div class="custom-radio custom-radio-success">
+                        <input type="radio" name="setorApr" value="false" id="setorApr_n">
+                        <label for="setorApr_n">Não</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input
+                    type="hidden"
+                    name="txtMatricNorm"
+                    id="txtMatricNorm"
+                    class="form-control"
+                    readonly
+                  />
+
+                  <input
+                    type="hidden"
+                    name="txtMailNorm"
+                    id="txtMailNorm"
+                    class="form-control"
+                    readonly
+                  />
+                <div class="form-group col-md-4">
+                  <label for="txtResponsavelNorm">Responsável</label>
+                  <input
+                    type="text"
+                    name="txtResponsavelNorm"
+                    id="txtResponsavelNorm"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="txtDataAproNorm">Data Aprovação</label>
+                  <input type="text" name="txtDataAproNorm" id="txtDataAproNorm" class="form-control" readonly/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12" id="txtNor">
+                  <label for="txtJusDrt" id="labelDescricao" class="required">Descrição</label>
+                  <textarea style="resize: none" rows="5" name="txtJusDrt" id="txtJusDrt" class="form-control" readonly></textarea>
+                </div>
+              </div>
+            </div> 
+          </fieldset>
+<!--------------------------------------------------------------------------------------------------------------------------------->
+          <div class="row">
+            <div
+              class="col-xs-12 fs-md-margin-top fs-xs-align-items-center fs-display-flex fs-justify-content-space-between"
+            >
+              <div class="col-xs-6 fs-no-padding" id="image-footer">
+                <img
+                  src="img/milicones-topo.png"
+                  alt="img-millpar"
+                  class="col-xs-12 fs-no-padding"
+                />
+              </div>
+              <div class="col-xs-3 fs-no-padding" id="logo-footer">
+                <img
+                  src="img/logo_branca.jpg"
+                  alt="logo"
+                  id="logoMillparDark"
+                  class="col-xs-12 fs-no-padding"
+                />
+                <img
+                  src="img/logo_nova.png"
+                  alt="logo2"
+                  id="logoMillparLight"
+                  class="col-xs-12 fs-no-padding"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="formMain.js"></script>
+  </body>
+</html>
